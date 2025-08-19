@@ -1,0 +1,58 @@
+---
+title: 'Lessons from Scaling Data Infrastructure'
+date: '2024-08-19'
+tags: ['data', 'infra', 'reliability']
+summary: 'Notes on contracts, SLAs, and cost control from scaling data services at Opendoor.'
+---
+
+# Lessons from Scaling Data Infrastructure
+
+Building reliable data infrastructure at scale requires more than just good engineering—it requires thoughtful contracts, clear SLAs, and relentless cost control.
+
+## The Challenge
+
+When I joined Opendoor in 2018, our data infrastructure was growing rapidly but inconsistently. We had multiple teams building their own data pipelines, leading to:
+
+- **Inconsistent reliability**: Some pipelines had 99%+ uptime, others failed weekly
+- **Unpredictable costs**: Infrastructure costs were growing 40% quarter-over-quarter
+- **Developer friction**: Teams spent more time debugging data issues than building features
+
+## The Solution
+
+We implemented a three-pronged approach:
+
+### 1. Standardized Data Contracts
+
+Every data service now requires:
+
+- Explicit schema definitions
+- Versioned APIs with backward compatibility
+- Clear ownership and SLAs
+
+### 2. Reliability Engineering
+
+- **Circuit breakers** for downstream dependencies
+- **Retry logic** with exponential backoff
+- **Monitoring** at every layer of the stack
+
+### 3. Cost Control
+
+- **Resource quotas** per team
+- **Cost alerts** when spending exceeds thresholds
+- **Regular optimization** sprints
+
+## Results
+
+After 18 months of implementation:
+
+- **99.9%+ uptime** on critical data paths
+- **30% reduction** in infrastructure costs
+- **10+ teams** now building on our data platform
+
+## Key Takeaways
+
+1. **Contracts matter more than code**: Clear interfaces prevent integration issues
+2. **Monitor everything**: You can't optimize what you can't measure
+3. **Cost control is a feature**: Teams appreciate predictable spending
+
+The most important lesson? **Reliability is a product feature, not just an engineering concern.** When data services are reliable, teams can move faster and build better products.

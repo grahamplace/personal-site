@@ -1,0 +1,67 @@
+[
+  {
+    "slug": "data-infra-opendoor",
+    "name": "Opendoor Data Infrastructure",
+    "thumb": "/images/opendoor-thumb.png",
+    "problem": "High-scale data services requiring reliability and cost control.",
+    "solution": "Re-architected critical pipelines; standardized data contracts; improved observability.",
+    "impact": [
+      "99.9%+ uptime on critical paths",
+      "Reduced cost by 30%",
+      "Accelerated dev velocity across 10+ teams"
+    ],
+    "metrics": {
+      "uptime": "99.9%+",
+      "costChange": "-30%",
+      "teams": "10+"
+    },
+    "images": ["/images/opendoor-1.png", "/images/opendoor-2.png"],
+    "tech": ["Airflow", "Snowflake", "Kafka", "GCP", "AWS"],
+    "links": []
+  },
+  {
+    "slug": "foundation-yc",
+    "name": "Foundation (YC) Consumer SaaS",
+    "thumb": "/images/foundation-thumb.png",
+    "problem": "Homebuilder consumer UX; need fast iteration and monetization.",
+    "solution": "Full-stack web + mobile; payments, onboarding, analytics, CI/CD.",
+    "impact": [
+      "Launched paid plans",
+      "Shortened onboarding by 40%",
+      "Improved retention to 85%"
+    ],
+    "metrics": {
+      "mrr": "$5,000",
+      "retention": "85%",
+      "onboardingChange": "-40%"
+    },
+    "images": ["/images/foundation-1.png"],
+    "tech": ["Next.js", "Expo", "Postgres", "Stripe"],
+    "links": [
+      {
+        "label": "Website",
+        "href": "#"
+      }
+    ]
+  },
+  {
+    "slug": "indie-suite",
+    "name": "Indie Micro-Products",
+    "thumb": "/images/indie-thumb.png",
+    "problem": "Niche user problems; validate quickly, monetize simply.",
+    "solution": "Small, opinionated tools with strong UX and simple pricing.",
+    "impact": [
+      "Generated $8,000/yr",
+      "Lean ops; automated support",
+      "Fast iteration loop"
+    ],
+    "metrics": {
+      "projects": 3,
+      "revenue": "$8,000/yr",
+      "users": "2,000+"
+    },
+    "images": [],
+    "tech": ["Next.js", "Vercel", "Stripe"],
+    "links": []
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "name": "Graham Place",
+  "title": "Software Engineer",
+  "tagline": "Engineer & builder with a focus on data systems and product impact.",
+  "location": "San Francisco, CA",
+  "email": "grahamgplace@gmail.com",
+  "links": [
+    {
+      "label": "GitHub",
+      "href": "https://github.com/grahamplace"
+    },
+    {
+      "label": "LinkedIn",
+      "href": "https://linkedin.com/in/grahamplace"
+    },
+    {
+      "label": "Resume (PDF)",
+      "href": "/resume.pdf"
+    }
+  ]
+}

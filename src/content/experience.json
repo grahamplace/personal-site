@@ -1,0 +1,71 @@
+[
+  {
+    "company": "Opendoor",
+    "role": "Senior Software Engineer — Data Infra/Data Services",
+    "start": "2018-01-01",
+    "end": "2023-05-01",
+    "summary": "Scaled data infrastructure and services; reliability and growth at production scale.",
+    "highlights": [
+      "Owned data services powering 10+ internal teams",
+      "Improved pipeline reliability to >99.9% on critical paths",
+      "Led cross-functional effort to reduce infra costs by 30%"
+    ],
+    "metrics": {
+      "years": 5.2,
+      "teamsImpacted": "10+",
+      "reliability": "99.9%+"
+    },
+    "tech": ["Python", "Go", "Snowflake", "Airflow", "Kafka", "GCP", "AWS"]
+  },
+  {
+    "company": "Foundation (YC)",
+    "role": "Co-founder & CTO",
+    "start": "2023-06-01",
+    "end": "2024-08-01",
+    "summary": "Full-stack web & mobile for homebuilder consumer SaaS; led eng and product.",
+    "highlights": [
+      "Launched web + mobile apps; scaled to paying users",
+      "Managed engineers; CI/CD and observability from day 1",
+      "Shipped monetization features and pricing experiments"
+    ],
+    "metrics": {
+      "teamSize": "3–6",
+      "mrr": "$5,000+",
+      "retention": "85% 3-month"
+    },
+    "tech": [
+      "Next.js",
+      "React Native",
+      "Expo",
+      "Postgres",
+      "Stripe",
+      "Vercel",
+      "Cloudflare"
+    ]
+  },
+  {
+    "company": "Indie Projects",
+    "role": "Indie Dev / Solo-preneur",
+    "start": "2021-01-01",
+    "end": null,
+    "summary": "Multiple monetized micro-products; focus on product velocity and polish.",
+    "highlights": [
+      "Built 3 products with paying customers",
+      "Optimized funnels and onboarding with measurable lift",
+      "Automated ops + analytics for lean ops"
+    ],
+    "metrics": {
+      "projects": 3,
+      "revenue": "$8,000+/yr",
+      "users": "2,000+"
+    },
+    "tech": [
+      "Next.js",
+      "Cloud Functions",
+      "Stripe",
+      "Prisma",
+      "Supabase",
+      "PlanetScale"
+    ]
+  }
+]
