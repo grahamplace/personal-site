@@ -18,8 +18,6 @@ export function normalizeColor(hexCode) {
       ((hexCode >> 8) & 255) / 255,
       (255 & hexCode) / 255,
     ];
-    // MUSTFIX
-    console.log("normalizeColor result", result);
     return result;
   }
   ["SCREEN", "LINEAR_LIGHT"].reduce(
@@ -920,8 +918,6 @@ export function normalizeColor(hexCode) {
      */
     initGradientColors() {
       if (!this.computedCanvasStyle) {
-        // MUSTFIX
-        console.log("NO computedCanvasStyle");
         return;
       }
       this.sectionColors = [
