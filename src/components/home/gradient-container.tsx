@@ -14,6 +14,7 @@ import clsx from 'clsx';
 import {
   type Section,
   getSectionGradientColors,
+  getSectionGradientColorsForLibrary,
   updateCssGradientColors,
   initializeCssGradientColors,
 } from '@/lib/colors';
@@ -42,10 +43,10 @@ function GradientContainerInner() {
         section === 'contact')
     ) {
       const sectionKey = section as Section;
-      const newColors = getSectionGradientColors(sectionKey);
+      const gradientColors = getSectionGradientColorsForLibrary(sectionKey);
 
       // Update both the gradient and CSS variables
-      (gradient as any).updateColors(newColors);
+      (gradient as any).updateColors(gradientColors);
       updateCssGradientColors(sectionKey);
       setCurrentSection(sectionKey);
     }
@@ -53,10 +54,10 @@ function GradientContainerInner() {
 
   const handleBack = () => {
     if (gradient) {
-      const heroColors = getSectionGradientColors('hero');
+      const gradientColors = getSectionGradientColorsForLibrary('hero');
 
       // Update both the gradient and CSS variables
-      (gradient as any).updateColors(heroColors);
+      (gradient as any).updateColors(gradientColors);
       updateCssGradientColors('hero');
       setCurrentSection('hero');
     }

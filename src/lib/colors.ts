@@ -1,7 +1,7 @@
 // Centralized color configuration for the gradient system
 // This prevents color drift between CSS variables and JavaScript color sets
 
-export type Section = 'hero' | 'experience' | 'blog' | 'contact';
+export type Section = keyof typeof GRADIENT_COLORS;
 
 // https://coolors.co/palette/0d0e14-252933-404556-60515c-777076-597d7c-386775-20504e-193d31-17292b
 const baseColor1 = '#252933'; // Raisin Black
@@ -20,6 +20,12 @@ export const GRADIENT_COLORS = {
   contact: [baseColor1, baseColor2, baseColor3, accentColor4],
 } as const;
 
+export const SECTION_ACCENT_COLORS = {
+  experience: accentColor2,
+  blog: accentColor3,
+  contact: accentColor4,
+} as const;
+
 // Default colors (hero section)
 export const DEFAULT_GRADIENT_COLORS = GRADIENT_COLORS.hero;
 
@@ -34,8 +40,19 @@ export function getSectionColors(section: Section): string[] {
 }
 
 // Get gradient format colors for a specific section
-export function getSectionGradientColors(section: Section): number[] {
+export function getSectionGradientColors(section: Section): readonly string[] {
+  return GRADIENT_COLORS[section];
+}
+
+// Get gradient colors in the format expected by the gradient library
+export function getSectionGradientColorsForLibrary(section: Section): number[] {
   return hexToGradientFormat(GRADIENT_COLORS[section]);
+}
+
+export function getSectionAccentColor(
+  section: keyof typeof SECTION_ACCENT_COLORS
+): string {
+  return SECTION_ACCENT_COLORS[section];
 }
 
 // CSS variable names for the gradient system
@@ -48,11 +65,11 @@ export const GRADIENT_CSS_VARS = [
 
 // Update CSS variables for a section
 export function updateCssGradientColors(section: Section): void {
-  const colors = getSectionColors(section);
+  const colors = getSectionGradientColors(section);
   const root = document.documentElement;
 
-  GRADIENT_CSS_VARS.forEach((cssVar, index) => {
-    root.style.setProperty(cssVar, colors[index]);
+  colors.forEach((color, index) => {
+    root.style.setProperty(`--gradient-color-${index + 1}`, color);
   });
 }
 

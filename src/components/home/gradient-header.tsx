@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { GradientButton } from '@/components/ui/gradient-button';
+import { getSectionAccentColor } from '@/lib/colors';
 
 interface GradientHeaderProps {
   className?: string;
@@ -12,9 +14,9 @@ interface GradientHeaderProps {
 }
 
 const navigationItems = [
-  { id: 'experience', label: 'Experience', color: 'cactusGreen' },
-  { id: 'blog', label: 'Blog', color: 'sandstone' },
-  { id: 'contact', label: 'Contact', color: 'sunsetOrange' },
+  { id: 'experience' as const, label: 'Experience' },
+  { id: 'blog' as const, label: 'Blog' },
+  { id: 'contact' as const, label: 'Contact' },
 ];
 
 export function GradientHeader({
@@ -70,23 +72,20 @@ export function GradientHeader({
           )}
 
           {navigationItems.map((item, index) => (
-            <motion.button
+            <motion.div
               key={item.id}
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => onNavigate(item.id)}
-              className={cn(
-                'w-40 rounded-lg border px-8 py-4 text-lg font-medium shadow-lg backdrop-blur-sm transition-all duration-200',
-                currentSection === item.id
-                  ? 'border-white/50 bg-white/40 text-white shadow-xl'
-                  : 'border-white/30 bg-white/20 text-white hover:bg-white/30 hover:shadow-xl'
-              )}
             >
-              {item.label}
-            </motion.button>
+              <GradientButton
+                onClick={() => onNavigate(item.id)}
+                isActive={currentSection === item.id}
+                accentColor={getSectionAccentColor(item.id)}
+              >
+                {item.label}
+              </GradientButton>
+            </motion.div>
           ))}
         </motion.div>
       </div>

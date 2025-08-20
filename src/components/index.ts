@@ -6,6 +6,7 @@ export { Badge } from './ui/badge';
 export { Stat } from './ui/stat';
 export { KPIList } from './ui/kpi-list';
 export { GlassPane } from './ui/glass-pane';
+export { GradientButton } from './ui/gradient-button';
 
 // Case Study Components
 export { CaseStudyHero } from './case-study/case-study-hero';
