@@ -23,11 +23,6 @@ export { BlogCard } from './blog/blog-card';
 export { MDXRenderer } from './blog/mdx-renderer';
 export { AutoHeaderGraphic } from './blog/auto-header-graphic';
 
-// Data Visualization Components
-export { DataVizTimeline } from './data-viz/data-viz-timeline';
-export { SkillsCluster } from './data-viz/skills-cluster';
-export { PipelineDiagram } from './data-viz/pipeline-diagram';
-
 // Theme Components
 export { ThemeAccent } from './theme/theme-accent';
 
