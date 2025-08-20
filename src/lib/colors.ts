@@ -60,3 +60,23 @@ export function updateCssGradientColors(section: Section): void {
 export function initializeCssGradientColors(): void {
   updateCssGradientColors('hero');
 }
+
+// Ensure CSS variables are always in sync with the current configuration
+export function ensureCssVariablesSync(): void {
+  // Check if we're in a browser environment
+  if (typeof document !== 'undefined') {
+    const root = document.documentElement;
+    const currentColors = getSectionColors('hero');
+
+    // Verify that CSS variables match the current configuration
+    GRADIENT_CSS_VARS.forEach((cssVar, index) => {
+      const currentValue = root.style.getPropertyValue(cssVar);
+      const expectedValue = currentColors[index];
+
+      // If CSS variable is not set or doesn't match, update it
+      if (!currentValue || currentValue !== expectedValue) {
+        root.style.setProperty(cssVar, expectedValue);
+      }
+    });
+  }
+}

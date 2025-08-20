@@ -35,12 +35,8 @@ body {
   color: #111827; /* gray-900 */
 }
 
-/* Gradient canvas defaults - using unified dark cohesive palette */
 #gradient-canvas {
   width: 100%;
   height: 100%;
-  --gradient-color-1: #0b0f14;
-  --gradient-color-2: #0e1623;
-  --gradient-color-3: #111b2a;
-  --gradient-color-4: #152234;
+  /* CSS variables will be set dynamically from colors.ts */
 }
