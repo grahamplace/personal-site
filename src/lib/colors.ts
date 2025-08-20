@@ -3,12 +3,21 @@
 
 export type Section = 'hero' | 'experience' | 'blog' | 'contact';
 
-// Ultra-dark cohesive palette with subtle differences between hues
+// https://coolors.co/palette/0d0e14-252933-404556-60515c-777076-597d7c-386775-20504e-193d31-17292b
+const baseColor1 = '#252933'; // Raisin Black
+const baseColor2 = '#404556'; // Charcoal
+const baseColor3 = '#17292B'; // Gunmetal
+const accentColor1 = '#60515C'; // Wenge
+const accentColor2 = '#597D7C'; // Hooker's Green
+const accentColor3 = '#386775'; // Payne's Gray
+const accentColor4 = '#20504E'; // Dark Slate Gray
+const accentColor5 = '#20504E'; // Dark Green
+
 export const GRADIENT_COLORS = {
-  hero: ['#0b0f14', '#0e1623', '#111b2a', '#152234'],
-  experience: ['#0e1623', '#111b2a', '#152234', '#0b0f14'],
-  blog: ['#111b2a', '#152234', '#0b0f14', '#0e1623'],
-  contact: ['#152234', '#0b0f14', '#0e1623', '#111b2a'],
+  hero: [baseColor1, baseColor2, baseColor3, accentColor1],
+  experience: [baseColor1, baseColor2, baseColor3, accentColor2],
+  blog: [baseColor1, baseColor2, baseColor3, accentColor3],
+  contact: [baseColor1, baseColor2, baseColor3, accentColor4],
 } as const;
 
 // Default colors (hero section)
