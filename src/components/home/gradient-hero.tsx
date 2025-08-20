@@ -57,13 +57,9 @@ export function GradientHero({ className, onNavigate }: GradientHeroProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-              whileHover={{
-                scale: 1.05,
-                transition: { duration: 0.2 },
-              }}
               whileTap={{ scale: 0.95 }}
               onClick={() => onNavigate(item.id)}
-              className="rounded-lg border border-white/30 bg-white/20 px-8 py-4 text-lg font-medium text-white shadow-lg backdrop-blur-sm transition-all duration-200 hover:bg-white/30 hover:shadow-xl"
+              className="w-40 rounded-lg border border-white/30 bg-white/20 px-8 py-4 text-lg font-medium text-white shadow-lg backdrop-blur-sm transition-all duration-200 hover:bg-white/30 hover:shadow-xl"
             >
               {item.label}
             </motion.button>
