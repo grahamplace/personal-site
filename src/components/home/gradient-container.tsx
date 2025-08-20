@@ -10,16 +10,12 @@ import { GradientBlog } from './gradient-blog';
 import { GradientContact } from './gradient-contact';
 import { Gradient } from '@/lib/gradient.js';
 import clsx from 'clsx';
-
-type Section = 'hero' | 'experience' | 'blog' | 'contact';
-
-// Ultra-dark cohesive palette; subtle differences between hues
-const sectionColorSets = [
-  ['#0b0f14', '#0e1623', '#111b2a', '#152234'], // hero
-  ['#0e1623', '#111b2a', '#152234', '#0b0f14'], // experience
-  ['#111b2a', '#152234', '#0b0f14', '#0e1623'], // blog
-  ['#152234', '#0b0f14', '#0e1623', '#111b2a'], // contact
-];
+import {
+  type Section,
+  getSectionGradientColors,
+  updateCssGradientColors,
+  initializeCssGradientColors,
+} from '@/lib/colors';
 
 function GradientContainerInner() {
   const [gradient, setGradient] = useState<Gradient | null>(null);
@@ -27,6 +23,9 @@ function GradientContainerInner() {
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
+    // Initialize CSS gradient colors with hero section colors
+    initializeCssGradientColors();
+
     const newGradient = new Gradient();
     (newGradient as any).initGradient('#gradient-canvas');
     setGradient(newGradient);
@@ -34,24 +33,30 @@ function GradientContainerInner() {
   }, []);
 
   const handleNavigate = (section: string) => {
-    const sectionIndex = ['hero', 'experience', 'blog', 'contact'].indexOf(
-      section
-    );
-    if (sectionIndex !== -1 && gradient) {
-      const newColors = sectionColorSets[sectionIndex].map((color) =>
-        parseInt(color.replace('#', ''), 16)
-      );
+    if (
+      gradient &&
+      (section === 'hero' ||
+        section === 'experience' ||
+        section === 'blog' ||
+        section === 'contact')
+    ) {
+      const sectionKey = section as Section;
+      const newColors = getSectionGradientColors(sectionKey);
+
+      // Update both the gradient and CSS variables
       (gradient as any).updateColors(newColors);
-      setCurrentSection(section as Section);
+      updateCssGradientColors(sectionKey);
+      setCurrentSection(sectionKey);
     }
   };
 
   const handleBack = () => {
     if (gradient) {
-      const heroColors = sectionColorSets[0].map((color) =>
-        parseInt(color.replace('#', ''), 16)
-      );
+      const heroColors = getSectionGradientColors('hero');
+
+      // Update both the gradient and CSS variables
       (gradient as any).updateColors(heroColors);
+      updateCssGradientColors('hero');
       setCurrentSection('hero');
     }
   };
