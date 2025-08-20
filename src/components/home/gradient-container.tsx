@@ -89,6 +89,7 @@ function GradientContainerInner() {
               onNavigate={handleNavigate}
               onBack={handleBack}
               showBackButton={true}
+              currentSection={currentSection}
             />
           )}
         </AnimatePresence>

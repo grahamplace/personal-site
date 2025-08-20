@@ -8,6 +8,7 @@ interface GradientHeaderProps {
   onNavigate: (section: string) => void;
   onBack?: () => void;
   showBackButton?: boolean;
+  currentSection?: string;
 }
 
 const navigationItems = [
@@ -21,6 +22,7 @@ export function GradientHeader({
   onNavigate,
   onBack,
   showBackButton = false,
+  currentSection,
 }: GradientHeaderProps) {
   return (
     <motion.header
@@ -76,7 +78,12 @@ export function GradientHeader({
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => onNavigate(item.id)}
-              className="w-40 rounded-lg border border-white/30 bg-white/20 px-8 py-4 text-lg font-medium text-white shadow-lg backdrop-blur-sm transition-all duration-200 hover:bg-white/30 hover:shadow-xl"
+              className={cn(
+                'w-40 rounded-lg border px-8 py-4 text-lg font-medium shadow-lg backdrop-blur-sm transition-all duration-200',
+                currentSection === item.id
+                  ? 'border-white/50 bg-white/40 text-white shadow-xl'
+                  : 'border-white/30 bg-white/20 text-white hover:bg-white/30 hover:shadow-xl'
+              )}
             >
               {item.label}
             </motion.button>
