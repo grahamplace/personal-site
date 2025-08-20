@@ -28,3 +28,4 @@ export { ThemeAccent } from './theme/theme-accent';
 
 // Home Components
 export { GradientContainer } from './home/gradient-container';
+export { GradientHeader } from './home/gradient-header';

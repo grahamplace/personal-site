@@ -5,6 +5,7 @@
 import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { GradientHero } from './gradient-hero';
+import { GradientHeader } from './gradient-header';
 import { GradientExperience } from './gradient-experience';
 import { GradientBlog } from './gradient-blog';
 import { GradientContact } from './gradient-contact';
@@ -79,6 +80,18 @@ function GradientContainerInner() {
           aria-hidden
           className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(120%_80%_at_50%_-10%,transparent_40%,rgba(0,0,0,0.06)_70%,rgba(0,0,0,0.16)_100%)]"
         />
+
+        {/* Header - only show when not on hero page */}
+        <AnimatePresence>
+          {currentSection !== 'hero' && (
+            <GradientHeader
+              key="header"
+              onNavigate={handleNavigate}
+              onBack={handleBack}
+              showBackButton={true}
+            />
+          )}
+        </AnimatePresence>
 
         <AnimatePresence mode="wait" initial={false}>
           {currentSection === 'hero' && (

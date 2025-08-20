@@ -46,31 +46,13 @@ export function GradientContact({ className, onBack }: GradientContactProps) {
       className={cn('relative min-h-screen', className)}
     >
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-4xl px-6 py-24">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-16 space-y-6 text-center"
-        >
-          <GlassPane variant="strong" className="mx-auto max-w-3xl">
-            <h1 className="text-5xl font-bold text-white sm:text-6xl">
-              Contact
-            </h1>
-            <p className="mx-auto mt-4 max-w-2xl text-xl text-white/85">
-              Let&apos;s build something together. Reach out for collaborations,
-              opportunities, or just to chat.
-            </p>
-          </GlassPane>
-        </motion.div>
-
+      <div className="relative z-10 mx-auto max-w-4xl px-6 pb-24 pt-64">
         {/* Contact Methods */}
         <GlassPane variant="default" className="mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             className="grid gap-6 sm:grid-cols-2"
           >
             {contactMethods.map((method, index) => (
@@ -81,7 +63,7 @@ export function GradientContact({ className, onBack }: GradientContactProps) {
                 rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+                transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 className="bg-white/8 hover:bg-white/12 group rounded-lg border border-white/15 p-6 backdrop-blur-sm transition-all duration-200 hover:border-white/25 hover:shadow-lg"
@@ -106,7 +88,7 @@ export function GradientContact({ className, onBack }: GradientContactProps) {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-16 text-center"
         >
           <GlassPane variant="default" className="mx-auto max-w-3xl">
@@ -127,23 +109,6 @@ export function GradientContact({ className, onBack }: GradientContactProps) {
               Get in touch
             </motion.a>
           </GlassPane>
-        </motion.div>
-
-        {/* Back Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.0 }}
-          className="mt-16 text-center"
-        >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={onBack}
-            className="rounded-lg border border-white/30 bg-white/20 px-8 py-4 text-lg font-medium text-white shadow-lg backdrop-blur-sm transition-all duration-200 hover:bg-white/30 hover:shadow-xl"
-          >
-            ← Back to Home
-          </motion.button>
         </motion.div>
       </div>
     </motion.section>

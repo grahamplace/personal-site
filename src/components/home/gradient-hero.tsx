@@ -19,7 +19,7 @@ export function GradientHero({ className, onNavigate }: GradientHeroProps) {
     <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      exit={{ opacity: 0, y: -100 }}
       transition={{ duration: 0.6 }}
       className={cn(
         'relative flex min-h-screen items-center justify-center',
@@ -32,15 +32,15 @@ export function GradientHero({ className, onNavigate }: GradientHeroProps) {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="space-y-6"
         >
           <h1 className="text-6xl font-bold text-white sm:text-7xl lg:text-8xl">
             Graham Place
           </h1>
-          <p className="mx-auto max-w-2xl text-xl leading-relaxed text-white/90 sm:text-2xl">
-            Software engineer & builder focused on data systems and product
-            impact.
+          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-white/90 sm:text-2xl">
+            Software engineer & leader. Let&apos;s build something together.
           </p>
         </motion.div>
 
@@ -48,6 +48,7 @@ export function GradientHero({ className, onNavigate }: GradientHeroProps) {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -30 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           className="flex flex-col justify-center gap-6 sm:flex-row"
         >
@@ -56,6 +57,7 @@ export function GradientHero({ className, onNavigate }: GradientHeroProps) {
               key={item.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => onNavigate(item.id)}
