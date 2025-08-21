@@ -36,11 +36,11 @@ export function GradientHero({ className, onNavigate }: GradientHeroProps) {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="space-y-6"
         >
-          <h1 className="text-6xl font-bold text-white sm:text-7xl lg:text-8xl">
+          <h1 className="font-raleway text-6xl font-bold tracking-tight text-white sm:text-7xl lg:text-8xl">
             Graham Place
           </h1>
-          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-white/90 sm:text-2xl">
-            Software engineer & leader. Let&apos;s build something together.
+          <p className="font-raleway mx-auto max-w-3xl text-xl leading-relaxed text-white/90 sm:text-2xl">
+            {`Software engineer & leader. Let's build.`}
           </p>
         </motion.div>
 

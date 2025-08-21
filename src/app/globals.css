@@ -1,5 +1,16 @@
 @import 'tailwindcss';
 
+@property --border-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: '<angle>';
+}
+
+@theme {
+  --font-inter: var(--font-inter), system-ui, sans-serif;
+  --font-raleway: var(--font-raleway), system-ui, sans-serif;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

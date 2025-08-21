@@ -45,7 +45,7 @@ export function GradientHeader({
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-8 text-center"
         >
-          <h1 className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
+          <h1 className="font-raleway text-4xl font-black text-white sm:text-5xl lg:text-6xl">
             Graham Place
           </h1>
         </motion.div>
