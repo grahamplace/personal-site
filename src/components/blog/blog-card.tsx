@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Tag } from '../ui/tag';
+import { useNavigation } from '@/components/theme/global-navigation';
 
 interface BlogCardProps {
   title: string;
@@ -22,6 +22,7 @@ export function BlogCard({
   readingTime,
   className,
 }: BlogCardProps) {
+  const { openBlogPost } = useNavigation();
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -36,7 +37,7 @@ export function BlogCard({
       transition={{ duration: 0.25 }}
       className={cn('group', className)}
     >
-      <Link href={`/blog/${slug}`}>
+      <button onClick={() => openBlogPost(slug)} className="w-full text-left">
         <article
           className={cn(
             'relative h-full rounded-xl border border-white/15 p-6 shadow-md backdrop-blur-md transition-all duration-300',
@@ -95,7 +96,7 @@ export function BlogCard({
             </div>
           </div>
         </article>
-      </Link>
+      </button>
     </motion.div>
   );
 }

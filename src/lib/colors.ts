@@ -11,7 +11,6 @@ const accentColor1 = '#60515C'; // Wenge
 const accentColor2 = '#597D7C'; // Hooker's Green
 const accentColor3 = '#386775'; // Payne's Gray
 const accentColor4 = '#20504E'; // Dark Slate Gray
-const accentColor5 = '#20504E'; // Dark Green
 
 export const GRADIENT_COLORS = {
   hero: [baseColor1, baseColor2, baseColor3, accentColor1],
@@ -21,6 +20,7 @@ export const GRADIENT_COLORS = {
 } as const;
 
 export const SECTION_ACCENT_COLORS = {
+  hero: accentColor1,
   experience: accentColor2,
   blog: accentColor3,
   contact: accentColor4,

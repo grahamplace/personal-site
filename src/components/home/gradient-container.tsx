@@ -77,8 +77,6 @@ function GradientContainerInner() {
             <GradientHeader
               key="header"
               onNavigate={handleNavigate}
-              onBack={handleBack}
-              showBackButton={true}
               currentSection={currentSection}
             />
           )}

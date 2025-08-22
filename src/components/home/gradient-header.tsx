@@ -14,6 +14,7 @@ interface GradientHeaderProps {
 }
 
 const navigationItems = [
+  { id: 'hero' as const, label: '← Home' },
   { id: 'experience' as const, label: 'Experience' },
   { id: 'blog' as const, label: 'Blog' },
   { id: 'contact' as const, label: 'Contact' },
@@ -22,8 +23,6 @@ const navigationItems = [
 export function GradientHeader({
   className,
   onNavigate,
-  onBack,
-  showBackButton = false,
   currentSection,
 }: GradientHeaderProps) {
   return (
@@ -57,20 +56,6 @@ export function GradientHeader({
           transition={{ duration: 0.6, delay: 0.4 }}
           className="flex flex-col justify-center gap-4 sm:flex-row"
         >
-          {showBackButton && onBack && (
-            <motion.button
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={onBack}
-              className="w-40 rounded-lg border border-white/30 bg-white/20 px-8 py-4 text-lg font-medium text-white shadow-lg backdrop-blur-sm transition-all duration-200 hover:bg-white/30 hover:shadow-xl"
-            >
-              ← Home
-            </motion.button>
-          )}
-
           {navigationItems.map((item, index) => (
             <motion.div
               key={item.id}
