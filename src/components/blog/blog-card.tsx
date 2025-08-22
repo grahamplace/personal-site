@@ -32,12 +32,19 @@ export function BlogCard({
 
   return (
     <motion.div
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.2 }}
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.25 }}
       className={cn('group', className)}
     >
       <Link href={`/blog/${slug}`}>
-        <article className="bg-white/8 hover:bg-white/12 h-full rounded-lg border border-white/15 p-6 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-white/25 hover:shadow-md">
+        <article
+          className={cn(
+            'relative h-full rounded-xl border border-white/15 p-6 shadow-md backdrop-blur-md transition-all duration-300',
+            'bg-white/8 hover:bg-white/12 hover:border-white/25 hover:shadow-xl',
+            'before:absolute before:inset-0 before:-z-10 before:rounded-[inherit] before:opacity-0 before:transition-opacity before:duration-300',
+            'before:bg-[radial-gradient(60%_60%_at_50%_0%,rgba(255,255,255,0.12),transparent_60%)] group-hover:before:opacity-100'
+          )}
+        >
           <div className="space-y-4">
             {/* Meta */}
             <div className="flex items-center justify-between text-sm text-white/70">
@@ -46,7 +53,7 @@ export function BlogCard({
             </div>
 
             {/* Title */}
-            <h3 className="text-xl font-semibold text-white transition-colors group-hover:text-cyan-300">
+            <h3 className="text-xl font-semibold text-white/95 transition-colors group-hover:text-white">
               {title}
             </h3>
 
@@ -70,7 +77,7 @@ export function BlogCard({
             </div>
 
             {/* Read More */}
-            <div className="flex items-center text-sm font-medium text-cyan-300 group-hover:underline">
+            <div className="flex items-center text-sm font-medium text-white/85 transition-colors group-hover:text-white">
               Read more
               <svg
                 className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1"

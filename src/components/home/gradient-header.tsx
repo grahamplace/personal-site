@@ -67,7 +67,7 @@ export function GradientHeader({
               onClick={onBack}
               className="w-40 rounded-lg border border-white/30 bg-white/20 px-8 py-4 text-lg font-medium text-white shadow-lg backdrop-blur-sm transition-all duration-200 hover:bg-white/30 hover:shadow-xl"
             >
-              ← Back
+              ← Home
             </motion.button>
           )}
 

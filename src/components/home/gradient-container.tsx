@@ -10,10 +10,8 @@ import { GradientExperience } from './gradient-experience';
 import { GradientBlog } from './gradient-blog';
 import { GradientContact } from './gradient-contact';
 import { Gradient } from '@/lib/gradient.js';
-import clsx from 'clsx';
 import {
   type Section,
-  getSectionGradientColors,
   getSectionGradientColorsForLibrary,
   updateCssGradientColors,
   initializeCssGradientColors,
@@ -29,7 +27,7 @@ function GradientContainerInner() {
     initializeCssGradientColors();
 
     const newGradient = new Gradient();
-    (newGradient as any).initGradient('#gradient-canvas');
+    (newGradient as any).initGradient('#global-gradient-canvas');
     setGradient(newGradient);
     setIsInitialized(true);
   }, []);
@@ -71,16 +69,7 @@ function GradientContainerInner() {
         </div>
       )}
       <div className={isInitialized ? '' : 'hidden'}>
-        <canvas
-          className={clsx('fixed right-0 top-0 -z-10 h-full w-full')}
-          id="gradient-canvas"
-          data-transition-in
-        />
-        {/* Vignette overlay for subtle edge shading without altering gradient */}
-        <div
-          aria-hidden
-          className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(120%_80%_at_50%_-10%,transparent_40%,rgba(0,0,0,0.06)_70%,rgba(0,0,0,0.16)_100%)]"
-        />
+        {/* gradient moved to global layout */}
 
         {/* Header - only show when not on hero page */}
         <AnimatePresence>

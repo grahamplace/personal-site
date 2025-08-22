@@ -41,7 +41,7 @@ const blogPosts = [
   },
 ];
 
-export function GradientBlog({ className, onBack }: GradientBlogProps) {
+export function GradientBlog({ className }: GradientBlogProps) {
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -53,24 +53,21 @@ export function GradientBlog({ className, onBack }: GradientBlogProps) {
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-4xl px-6 pb-24 pt-64">
         {/* Blog Posts Grid */}
-        <GlassPane variant="default" className="mx-auto max-w-4xl">
+        <GlassPane variant="default" className="mx-auto max-w-5xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-8"
+            className="grid gap-6 sm:grid-cols-1 sm:gap-8 lg:grid-cols-2"
           >
             {blogPosts.map((post, index) => (
               <motion.div
                 key={post.slug}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+                transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
               >
-                <BlogCard
-                  {...post}
-                  className="border border-gray-200/50 bg-white/50 backdrop-blur-sm transition-all duration-200 hover:bg-white/70 hover:shadow-lg"
-                />
+                <BlogCard {...post} />
               </motion.div>
             ))}
           </motion.div>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Raleway, Geist_Mono } from 'next/font/google';
 import { ThemeAccent } from '@/components/theme/theme-accent';
+import { GlobalGradient } from '@/components/theme/global-gradient';
 import './globals.css';
 
 const inter = Inter({
@@ -60,6 +61,7 @@ export default function RootLayout({
         className={`${inter.variable} ${raleway.variable} ${geistMono.variable} font-sans antialiased`}
       >
         <ThemeAccent />
+        <GlobalGradient />
         <main className="min-h-screen">{children}</main>
       </body>
     </html>
