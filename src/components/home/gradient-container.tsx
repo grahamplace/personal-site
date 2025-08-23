@@ -82,7 +82,7 @@ function GradientContainerInner() {
           )}
         </AnimatePresence>
 
-        <AnimatePresence mode="wait" initial={false}>
+        <AnimatePresence mode="wait" initial={true}>
           {currentSection === 'hero' && (
             <GradientHero key="hero" onNavigate={handleNavigate} />
           )}

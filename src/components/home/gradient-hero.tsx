@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 interface GradientHeroProps {
@@ -15,6 +16,34 @@ const navigationItems = [
 ];
 
 export function GradientHero({ className, onNavigate }: GradientHeroProps) {
+  const verbs = ['build', 'code', 'learn', 'ship', 'sell'];
+  const [verbIndex, setVerbIndex] = useState(0);
+  const measureRef = useRef<HTMLDivElement>(null);
+  const [verbWidthPx, setVerbWidthPx] = useState<number>(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setVerbIndex((prev) => (prev + 1) % verbs.length);
+    }, 1800);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
+    const measure = () => {
+      const el = measureRef.current;
+      if (!el) return;
+      let max = 0;
+      Array.from(el.children).forEach((child) => {
+        const width = (child as HTMLElement).offsetWidth;
+        if (width > max) max = width;
+      });
+      setVerbWidthPx(max);
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, []);
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -39,8 +68,37 @@ export function GradientHero({ className, onNavigate }: GradientHeroProps) {
           <h1 className="font-raleway text-6xl font-bold tracking-tight text-white sm:text-7xl lg:text-8xl">
             Graham Place
           </h1>
-          <p className="font-raleway mx-auto max-w-3xl text-xl leading-relaxed text-white/90 sm:text-2xl">
-            {`Software engineer & leader. Let's build.`}
+          <p className="font-raleway relative mx-auto max-w-3xl text-xl leading-relaxed text-white/90 sm:text-3xl">
+            Software engineer & leader. Let&apos;s{' '}
+            <span
+              className="relative inline-flex h-[1.2em] overflow-hidden align-baseline leading-none"
+              style={{ width: verbWidthPx ? `${verbWidthPx}px` : undefined }}
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={verbs[verbIndex]}
+                  initial={{ y: '100%', opacity: 0 }}
+                  animate={{ y: '0%', opacity: 1 }}
+                  exit={{ y: '-100%', opacity: 0 }}
+                  transition={{ duration: 0.5, ease: 'easeInOut' }}
+                  className="inline-block w-[90px] text-left leading-none"
+                >
+                  {verbs[verbIndex]}
+                </motion.span>
+              </AnimatePresence>
+            </span>
+            {/* Invisible measurer to fix width across different verbs */}
+            <div
+              ref={measureRef}
+              className="invisible absolute left-0 top-0 -z-10 whitespace-nowrap"
+              aria-hidden="true"
+            >
+              {verbs.map((v) => (
+                <span key={v} className="inline-block">
+                  {v}
+                </span>
+              ))}
+            </div>
           </p>
         </motion.div>
 
