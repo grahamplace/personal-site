@@ -87,18 +87,6 @@ export function GradientHero({ className, onNavigate }: GradientHeroProps) {
                 </motion.span>
               </AnimatePresence>
             </span>
-            {/* Invisible measurer to fix width across different verbs */}
-            <div
-              ref={measureRef}
-              className="invisible absolute left-0 top-0 -z-10 whitespace-nowrap"
-              aria-hidden="true"
-            >
-              {verbs.map((v) => (
-                <span key={v} className="inline-block">
-                  {v}
-                </span>
-              ))}
-            </div>
           </p>
         </motion.div>
 
