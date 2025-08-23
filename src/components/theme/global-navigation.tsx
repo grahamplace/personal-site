@@ -5,6 +5,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from 'react';
@@ -14,6 +15,8 @@ export type Section = 'hero' | 'experience' | 'blog' | 'contact';
 interface NavigationContextType {
   currentSection: Section;
   isHomePage: boolean;
+  isHeroMode: boolean;
+  heroProgress: number;
   currentBlogSlug: string | null;
   navigateToSection: (section: Section) => void;
   openBlogPost: (slug: string) => void;
@@ -38,12 +41,23 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
   const [currentBlogSlug, setCurrentBlogSlug] = useState<string | null>(null);
   const [isAtTop, setIsAtTop] = useState(true);
   const [isNavigating, setIsNavigating] = useState(false);
+  const [isHeroMode, setIsHeroMode] = useState(true);
+  const [heroProgress, setHeroProgress] = useState(0);
 
-  // Determine header visibility: hide when at top of hero
-  const isHomePage = useMemo(
-    () => currentSection === 'hero' && isAtTop,
-    [currentSection, isAtTop]
-  );
+  // Refs to avoid stale closures in scroll handlers
+  const isNavigatingRef = useRef(isNavigating);
+  const isHeroModeRef = useRef(isHeroMode);
+  const lastScrollYRef = useRef(0);
+  const reentryGuardUntilRef = useRef(0);
+  useEffect(() => {
+    isNavigatingRef.current = isNavigating;
+  }, [isNavigating]);
+  useEffect(() => {
+    isHeroModeRef.current = isHeroMode;
+  }, [isHeroMode]);
+
+  // Determine header visibility: hide when in hero mode
+  const isHomePage = useMemo(() => isHeroMode, [isHeroMode]);
 
   // Scroll spy: detect which section is currently in view
   useEffect(() => {
@@ -52,7 +66,7 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
     const getCurrentSection = () => {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
-      const threshold = windowHeight * 0.3; // 30% of viewport height
+      const threshold = windowHeight * 0.4; // 40% of viewport height
 
       for (const sectionId of sectionIds) {
         const element = document.getElementById(sectionId);
@@ -74,13 +88,33 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
       return 'hero'; // fallback
     };
 
+    const HERO_EXIT_PX = 400; // distance to fully transition from hero to header
+    const HERO_ENTER_PX = 120; // re-enter hero only near very top (hysteresis)
     const onScroll = () => {
-      if (isNavigating) return; // Skip scroll spy during programmatic navigation
+      if (isNavigatingRef.current) return; // Skip during programmatic navigation
+
+      // Exit hero mode on first scroll
+      if (isHeroModeRef.current) {
+        const progress = Math.max(
+          0,
+          Math.min(1, window.scrollY / HERO_EXIT_PX)
+        );
+        if (progress !== heroProgress) setHeroProgress(progress);
+        if (progress >= 1) {
+          setIsHeroMode(false);
+          isHeroModeRef.current = false;
+          setHeroProgress(1);
+          // guard re-entry briefly to avoid reflow-caused flips
+          reentryGuardUntilRef.current = performance.now() + 250;
+        }
+      } else {
+        // TEMP DISABLE: Do not re-enter hero mode via scroll
+        if (heroProgress !== 1) setHeroProgress(1);
+      }
 
       const newSection = getCurrentSection();
-      if (newSection !== currentSection) {
-        setCurrentSection(newSection);
-      }
+      setCurrentSection((prev) => (prev !== newSection ? newSection : prev));
+      lastScrollYRef.current = window.scrollY;
     };
 
     // Initial check
@@ -89,7 +123,7 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
     // Add scroll listener
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, [currentSection]);
+  }, []);
 
   // Track whether we are at top of the page
   useEffect(() => {
@@ -122,6 +156,14 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
   }, []);
 
   const navigateToSection = (section: Section) => {
+    // Exit hero mode if we're navigating to a different section
+    if (section !== 'hero') {
+      setIsHeroMode(false);
+      setHeroProgress(1);
+    }
+    // TEMP DISABLE: Prevent programmatic navigation back to hero
+    if (section === 'hero') return;
+
     setIsNavigating(true);
     setCurrentSection(section); // Immediately set the target section
 
@@ -153,6 +195,8 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
   const value: NavigationContextType = {
     currentSection,
     isHomePage,
+    isHeroMode,
+    heroProgress,
     currentBlogSlug,
     navigateToSection,
     openBlogPost,
