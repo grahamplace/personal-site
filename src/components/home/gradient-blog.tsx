@@ -7,6 +7,7 @@ import { GlassPane } from '@/components/ui/glass-pane';
 
 interface GradientBlogProps {
   className?: string;
+  id?: string;
   onBack: () => void;
 }
 
@@ -41,22 +42,25 @@ const blogPosts = [
   },
 ];
 
-export function GradientBlog({ className }: GradientBlogProps) {
+export function GradientBlog({ className, id }: GradientBlogProps) {
   return (
     <motion.section
+      id={id}
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6 }}
       className={cn('relative min-h-screen', className)}
     >
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-4xl px-6 pb-24 pt-64">
+      <div className="relative z-10 mx-auto max-w-4xl px-6 pb-24 pt-48">
         {/* Blog Posts Grid */}
         <GlassPane variant="default" className="mx-auto max-w-5xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="grid gap-6 sm:grid-cols-1 sm:gap-8 lg:grid-cols-2"
           >
@@ -64,7 +68,8 @@ export function GradientBlog({ className }: GradientBlogProps) {
               <motion.div
                 key={post.slug}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
               >
                 <BlogCard {...post} />

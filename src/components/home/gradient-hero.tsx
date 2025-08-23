@@ -3,19 +3,21 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import type { Section } from '@/components/theme/global-navigation';
 
 interface GradientHeroProps {
   className?: string;
-  onNavigate: (section: string) => void;
+  id?: string;
+  onNavigate: (section: Section) => void;
 }
 
-const navigationItems = [
+const navigationItems: { id: Section; label: string; color: string }[] = [
   { id: 'experience', label: 'Experience', color: 'cactusGreen' },
   { id: 'blog', label: 'Blog', color: 'sandstone' },
   { id: 'contact', label: 'Contact', color: 'sunsetOrange' },
 ];
 
-export function GradientHero({ className, onNavigate }: GradientHeroProps) {
+export function GradientHero({ className, id, onNavigate }: GradientHeroProps) {
   const verbs = ['build', 'code', 'learn', 'ship', 'sell'];
   const [verbIndex, setVerbIndex] = useState(0);
   const measureRef = useRef<HTMLDivElement>(null);
@@ -46,6 +48,7 @@ export function GradientHero({ className, onNavigate }: GradientHeroProps) {
 
   return (
     <motion.section
+      id={id}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, y: -100 }}
@@ -114,6 +117,28 @@ export function GradientHero({ className, onNavigate }: GradientHeroProps) {
           ))}
         </motion.div>
       </div>
+
+      {/* Down arrow prompt */}
+      <motion.button
+        aria-label="Scroll to next section"
+        onClick={() => onNavigate('experience')}
+        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 rounded-full border border-white/30 bg-white/10 p-3 text-white shadow-md backdrop-blur-sm transition hover:bg-white/20"
+        animate={{ y: [0, 6, 0] }}
+        transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          className="h-6 w-6"
+        >
+          <path
+            fillRule="evenodd"
+            d="M12 3.75a.75.75 0 01.75.75v12.19l3.72-3.72a.75.75 0 111.06 1.06l-5 5a.75.75 0 01-1.06 0l-5-5a.75.75 0 111.06-1.06l3.72 3.72V4.5A.75.75 0 0112 3.75z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </motion.button>
     </motion.section>
   );
 }

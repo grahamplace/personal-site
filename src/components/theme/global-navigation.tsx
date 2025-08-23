@@ -4,10 +4,10 @@ import {
   createContext,
   useContext,
   useEffect,
+  useMemo,
   useState,
   type ReactNode,
 } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
 
 export type Section = 'hero' | 'experience' | 'blog' | 'contact';
 
@@ -33,27 +33,86 @@ interface NavigationProviderProps {
   children: ReactNode;
 }
 
-function inferSectionFromPath(path: string): Section {
-  if (path.startsWith('/blog')) return 'blog';
-  if (path.startsWith('/contact')) return 'contact';
-  if (path.startsWith('/experience')) return 'experience';
-  return 'hero';
-}
-
 export function NavigationProvider({ children }: NavigationProviderProps) {
-  const pathname = usePathname();
-  const router = useRouter();
   const [currentSection, setCurrentSection] = useState<Section>('hero');
   const [currentBlogSlug, setCurrentBlogSlug] = useState<string | null>(null);
+  const [isAtTop, setIsAtTop] = useState(true);
   const [isNavigating, setIsNavigating] = useState(false);
 
-  const isHomePage = pathname === '/';
+  // Determine header visibility: hide when at top of hero
+  const isHomePage = useMemo(
+    () => currentSection === 'hero' && isAtTop,
+    [currentSection, isAtTop]
+  );
 
+  // Scroll spy: detect which section is currently in view
   useEffect(() => {
-    if (!isNavigating) {
-      setCurrentSection(inferSectionFromPath(pathname));
+    const sectionIds: Section[] = ['hero', 'experience', 'blog', 'contact'];
+
+    const getCurrentSection = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const threshold = windowHeight * 0.3; // 30% of viewport height
+
+      for (const sectionId of sectionIds) {
+        const element = document.getElementById(sectionId);
+        if (!element) continue;
+
+        const rect = element.getBoundingClientRect();
+        const elementTop = rect.top + scrollY;
+        const elementBottom = elementTop + rect.height;
+
+        // Check if the threshold point is within this section
+        if (
+          scrollY + threshold >= elementTop &&
+          scrollY + threshold < elementBottom
+        ) {
+          return sectionId as Section;
+        }
+      }
+
+      return 'hero'; // fallback
+    };
+
+    const onScroll = () => {
+      if (isNavigating) return; // Skip scroll spy during programmatic navigation
+
+      const newSection = getCurrentSection();
+      if (newSection !== currentSection) {
+        setCurrentSection(newSection);
+      }
+    };
+
+    // Initial check
+    onScroll();
+
+    // Add scroll listener
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [currentSection]);
+
+  // Track whether we are at top of the page
+  useEffect(() => {
+    const onScroll = () => {
+      setIsAtTop(window.scrollY < 80);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Update global gradient colors when section changes (debounced)
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.__setGradientSection) {
+      const timeoutId = setTimeout(() => {
+        if (window.__setGradientSection) {
+          window.__setGradientSection(currentSection);
+        }
+      }, 150); // 150ms debounce
+
+      return () => clearTimeout(timeoutId);
     }
-  }, [pathname, isNavigating]);
+  }, [currentSection]);
 
   // Restore blog overlay from URL on load
   useEffect(() => {
@@ -63,12 +122,18 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
   }, []);
 
   const navigateToSection = (section: Section) => {
-    if (section === currentSection) return;
     setIsNavigating(true);
-    setCurrentSection(section);
-    if (section === 'hero') router.push('/');
-    else router.push('/');
-    setTimeout(() => setIsNavigating(false), 100);
+    setCurrentSection(section); // Immediately set the target section
+
+    const el = document.getElementById(section);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Re-enable scroll spy after scroll animation completes
+    setTimeout(() => {
+      setIsNavigating(false);
+    }, 1000); // Slightly longer than typical smooth scroll duration
   };
 
   const openBlogPost = (slug: string) => {

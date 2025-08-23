@@ -6,6 +6,7 @@ import { GlassPane } from '@/components/ui/glass-pane';
 
 interface GradientContactProps {
   className?: string;
+  id?: string;
   onBack: () => void;
 }
 
@@ -36,22 +37,29 @@ const contactMethods = [
   },
 ];
 
-export function GradientContact({ className, onBack }: GradientContactProps) {
+export function GradientContact({
+  className,
+  id,
+  onBack,
+}: GradientContactProps) {
   return (
     <motion.section
+      id={id}
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6 }}
       className={cn('relative min-h-screen', className)}
     >
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-4xl px-6 pb-24 pt-64">
+      <div className="relative z-10 mx-auto max-w-4xl px-6 pb-24 pt-48">
         {/* Contact Methods */}
         <GlassPane variant="default" className="mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="grid gap-6 sm:grid-cols-2"
           >
@@ -62,7 +70,8 @@ export function GradientContact({ className, onBack }: GradientContactProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
@@ -87,7 +96,8 @@ export function GradientContact({ className, onBack }: GradientContactProps) {
         {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-16 text-center"
         >
