@@ -11,14 +11,8 @@ interface GradientHeroProps {
   onNavigate: (section: Section) => void;
 }
 
-const navigationItems: { id: Section; label: string; color: string }[] = [
-  { id: 'experience', label: 'Experience', color: 'cactusGreen' },
-  { id: 'blog', label: 'Blog', color: 'sandstone' },
-  { id: 'contact', label: 'Contact', color: 'sunsetOrange' },
-];
-
 export function GradientHero({ className, id, onNavigate }: GradientHeroProps) {
-  const verbs = ['build', 'code', 'learn', 'ship', 'sell'];
+  const verbs = ['build', 'code', 'ship', 'sell', 'work', 'design'];
   const [verbIndex, setVerbIndex] = useState(0);
 
   useEffect(() => {
@@ -63,7 +57,7 @@ export function GradientHero({ className, id, onNavigate }: GradientHeroProps) {
                   animate={{ y: '0%', opacity: 1 }}
                   exit={{ y: '-100%', opacity: 0 }}
                   transition={{ duration: 0.5, ease: 'easeInOut' }}
-                  className="inline-block w-[90px] text-left leading-none"
+                  className="inline-block w-[94px] text-left leading-none"
                 >
                   {verbs[verbIndex]}
                 </motion.span>
@@ -75,11 +69,11 @@ export function GradientHero({ className, id, onNavigate }: GradientHeroProps) {
         <motion.button
           aria-label="Scroll to next section"
           onClick={() => onNavigate('experience')}
-          className="absolute left-1/2 z-10 -translate-x-1/2 rounded-full border border-white/30 bg-white/10 p-3.5 text-white shadow-md backdrop-blur-sm transition hover:bg-white/20"
+          className="absolute left-1/2 z-10 mt-4 -translate-x-1/2 rounded-full border border-white/30 bg-white/10 p-3.5 text-white shadow-md backdrop-blur-sm transition hover:bg-white/20"
           initial={{ opacity: 0 }}
           animate={{
             opacity: 1,
-            y: [0, 24, 0],
+            y: [0, 12, 0],
           }}
           transition={{
             opacity: { duration: 0.6, delay: 1.2 },

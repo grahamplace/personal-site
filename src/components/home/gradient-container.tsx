@@ -19,9 +19,6 @@ export function GradientContainer() {
         )}
       </AnimatePresence>
 
-      {/* Spacer to allow scroll-driven hero transition when in hero mode */}
-      {isHeroMode && <div aria-hidden className="h-[400px] w-full" />}
-
       {/* Other sections with entrance animation */}
       <AnimatePresence mode="wait">
         {!isHeroMode && (
