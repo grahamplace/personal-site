@@ -23,10 +23,10 @@ export function GradientExperience({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -50 }}
       transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
-      className={cn('relative', className)}
+      className={cn('relative mt-40 scroll-mt-56 md:mt-56', className)}
     >
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-4xl px-6 pb-24 pt-80">
+      <div className="relative z-10 mx-auto max-w-4xl px-6 pb-8 pt-12 md:pb-12 md:pt-12">
         {/* Experience Content */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

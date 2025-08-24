@@ -52,7 +52,7 @@ export function GradientContact({
       className={cn('relative', className)}
     >
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-4xl px-6 pb-12 pt-32">
+      <div className="relative z-10 mx-auto max-w-4xl px-6 pb-8 pt-24 md:pb-12 md:pt-32">
         {/* Contact Methods */}
         <GlassPane variant="default" className="mx-auto max-w-4xl">
           <motion.div
@@ -60,7 +60,7 @@ export function GradientContact({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="grid gap-6 sm:grid-cols-2"
+            className="grid gap-4 sm:grid-cols-2 md:gap-6"
           >
             {contactMethods.map((method, index) => (
               <motion.a
@@ -98,7 +98,7 @@ export function GradientContact({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-16 text-center"
+          className="mt-10 text-center md:mt-14"
         >
           <GlassPane variant="default" className="mx-auto max-w-3xl">
             <h3 className="mb-4 text-2xl font-bold text-white">

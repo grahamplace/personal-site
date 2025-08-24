@@ -53,7 +53,7 @@ export function GradientBlog({ className, id }: GradientBlogProps) {
       className={cn('relative', className)}
     >
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-4xl px-6 pb-12 pt-32">
+      <div className="relative z-10 mx-auto max-w-4xl px-6 pb-8 pt-24 md:pb-12 md:pt-32">
         {/* Blog Posts Grid */}
         <GlassPane variant="default" className="mx-auto max-w-5xl">
           <motion.div
@@ -61,7 +61,7 @@ export function GradientBlog({ className, id }: GradientBlogProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="grid gap-6 sm:grid-cols-1 sm:gap-8 lg:grid-cols-2"
+            className="grid gap-4 sm:grid-cols-1 md:gap-6 lg:grid-cols-2"
           >
             {blogPosts.map((post, index) => (
               <motion.div
