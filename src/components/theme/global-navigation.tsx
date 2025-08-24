@@ -16,7 +16,6 @@ interface NavigationContextType {
   currentSection: Section;
   isHomePage: boolean;
   isHeroMode: boolean;
-  heroProgress: number;
   currentBlogSlug: string | null;
   navigateToSection: (section: Section) => void;
   openBlogPost: (slug: string) => void;
@@ -39,10 +38,8 @@ interface NavigationProviderProps {
 export function NavigationProvider({ children }: NavigationProviderProps) {
   const [currentSection, setCurrentSection] = useState<Section>('hero');
   const [currentBlogSlug, setCurrentBlogSlug] = useState<string | null>(null);
-  const [isAtTop, setIsAtTop] = useState(true);
   const [isNavigating, setIsNavigating] = useState(false);
   const [isHeroMode, setIsHeroMode] = useState(true);
-  const [heroProgress, setHeroProgress] = useState(0);
 
   // Refs to avoid stale closures in scroll handlers
   const isNavigatingRef = useRef(isNavigating);
@@ -89,27 +86,15 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
     };
 
     const HERO_EXIT_PX = 400; // distance to fully transition from hero to header
-    const HERO_ENTER_PX = 120; // re-enter hero only near very top (hysteresis)
     const onScroll = () => {
       if (isNavigatingRef.current) return; // Skip during programmatic navigation
 
-      // Exit hero mode on first scroll
-      if (isHeroModeRef.current) {
-        const progress = Math.max(
-          0,
-          Math.min(1, window.scrollY / HERO_EXIT_PX)
-        );
-        if (progress !== heroProgress) setHeroProgress(progress);
-        if (progress >= 1) {
-          setIsHeroMode(false);
-          isHeroModeRef.current = false;
-          setHeroProgress(1);
-          // guard re-entry briefly to avoid reflow-caused flips
-          reentryGuardUntilRef.current = performance.now() + 250;
-        }
-      } else {
-        // TEMP DISABLE: Do not re-enter hero mode via scroll
-        if (heroProgress !== 1) setHeroProgress(1);
+      // Exit hero mode on scroll
+      if (isHeroModeRef.current && window.scrollY > HERO_EXIT_PX) {
+        setIsHeroMode(false);
+        isHeroModeRef.current = false;
+        // guard re-entry briefly to avoid reflow-caused flips
+        reentryGuardUntilRef.current = performance.now() + 250;
       }
 
       const newSection = getCurrentSection();
@@ -121,16 +106,6 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
     onScroll();
 
     // Add scroll listener
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  // Track whether we are at top of the page
-  useEffect(() => {
-    const onScroll = () => {
-      setIsAtTop(window.scrollY < 80);
-    };
-    onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -161,13 +136,11 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
     if (section === 'hero') {
       // Programmatically re-enter hero mode and scroll to top
       setIsHeroMode(true);
-      setHeroProgress(0);
       setCurrentSection('hero');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       // Exit hero mode when navigating away
       setIsHeroMode(false);
-      setHeroProgress(1);
       setCurrentSection(section);
 
       // Sections mount after hero exits; wait until the target exists, then scroll
@@ -210,7 +183,6 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
     currentSection,
     isHomePage,
     isHeroMode,
-    heroProgress,
     currentBlogSlug,
     navigateToSection,
     openBlogPost,

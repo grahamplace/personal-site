@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import type { Section } from '@/components/theme/global-navigation';
-import { useNavigation } from '@/components/theme/global-navigation';
 
 interface GradientHeroProps {
   className?: string;
@@ -19,7 +18,6 @@ const navigationItems: { id: Section; label: string; color: string }[] = [
 ];
 
 export function GradientHero({ className, id, onNavigate }: GradientHeroProps) {
-  const { isHeroMode, heroProgress } = useNavigation();
   const verbs = ['build', 'code', 'learn', 'ship', 'sell'];
   const [verbIndex, setVerbIndex] = useState(0);
   const measureRef = useRef<HTMLDivElement>(null);
@@ -30,7 +28,7 @@ export function GradientHero({ className, id, onNavigate }: GradientHeroProps) {
       setVerbIndex((prev) => (prev + 1) % verbs.length);
     }, 1800);
     return () => clearInterval(intervalId);
-  }, []);
+  }, [verbs.length]);
 
   useEffect(() => {
     const measure = () => {
@@ -47,10 +45,6 @@ export function GradientHero({ className, id, onNavigate }: GradientHeroProps) {
     window.addEventListener('resize', measure);
     return () => window.removeEventListener('resize', measure);
   }, []);
-
-  // Map heroProgress (0-1) to hero transforms
-  const heroOpacity = 1 - heroProgress;
-  const heroTranslateY = -50 * heroProgress;
 
   return (
     <motion.section
@@ -70,7 +64,6 @@ export function GradientHero({ className, id, onNavigate }: GradientHeroProps) {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          style={{ opacity: heroOpacity, y: heroTranslateY }}
           exit={{ opacity: 0, y: -50 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="space-y-6"
