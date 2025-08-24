@@ -16,6 +16,7 @@ interface NavigationContextType {
   currentSection: Section;
   isHomePage: boolean;
   isHeroMode: boolean;
+  isNavigating: boolean;
   currentBlogSlug: string | null;
   navigateToSection: (section: Section) => void;
   openBlogPost: (slug: string) => void;
@@ -183,6 +184,7 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
     currentSection,
     isHomePage,
     isHeroMode,
+    isNavigating,
     currentBlogSlug,
     navigateToSection,
     openBlogPost,
