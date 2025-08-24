@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { GlassPane } from '@/components/ui/glass-pane';
 
-interface GradientContactProps {
+interface ContactProps {
   className?: string;
   id?: string;
   onBack: () => void;
@@ -37,11 +37,7 @@ const contactMethods = [
   },
 ];
 
-export function GradientContact({
-  className,
-  id,
-  onBack,
-}: GradientContactProps) {
+export function Contact({ className, id, onBack }: ContactProps) {
   return (
     <motion.section
       id={id}

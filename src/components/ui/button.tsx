@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
-interface GradientButtonProps {
+interface ButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
   className?: string;
@@ -11,13 +11,13 @@ interface GradientButtonProps {
   accentColor?: string;
 }
 
-export function GradientButton({
+export function Button({
   children,
   onClick,
   className,
   isActive = false,
   accentColor,
-}: GradientButtonProps) {
+}: ButtonProps) {
   return (
     <motion.button
       whileHover={{ scale: 1.05 }}

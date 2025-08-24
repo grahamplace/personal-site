@@ -3,10 +3,10 @@
 import { AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useNavigation } from '@/components/theme/global-navigation';
-import { GradientHero } from './gradient-hero';
-import { GradientExperience } from './gradient-experience';
-import { GradientBlog } from './gradient-blog';
-import { GradientContact } from './gradient-contact';
+import { Hero } from './hero';
+import { Experience } from './experience';
+import { Blog } from './blog';
+import { Contact } from './contact';
 
 function useFakeScroll(): ['up' | 'down' | null, () => void] {
   const [direction, setDirection] = useState<'up' | 'down' | null>(null);
@@ -126,7 +126,7 @@ function useFakeScroll(): ['up' | 'down' | null, () => void] {
   return [direction, triggerSwallowing];
 }
 
-export function GradientContainer() {
+export function Container() {
   const { navigateToSection, isHeroMode } = useNavigation();
   // const [scrollDirection, triggerSwallowing] = useFakeScroll();
 
@@ -143,7 +143,7 @@ export function GradientContainer() {
       {/* Hero section with exit animation */}
       <AnimatePresence mode="wait">
         {isHeroMode && (
-          <GradientHero key="hero" id="hero" onNavigate={navigateToSection} />
+          <Hero key="hero" id="hero" onNavigate={navigateToSection} />
         )}
       </AnimatePresence>
 
@@ -151,17 +151,17 @@ export function GradientContainer() {
       <AnimatePresence mode="wait">
         {!isHeroMode && (
           <>
-            <GradientExperience
+            <Experience
               key="experience"
               id="experience"
               onBack={() => navigateToSection('hero')}
             />
-            <GradientBlog
+            <Blog
               key="blog"
               id="blog"
               onBack={() => navigateToSection('hero')}
             />
-            <GradientContact
+            <Contact
               key="contact"
               id="contact"
               onBack={() => navigateToSection('hero')}

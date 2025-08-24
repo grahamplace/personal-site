@@ -5,17 +5,13 @@ import { cn } from '@/lib/utils';
 import { Resume } from '@/components/resume/resume';
 import { GlassPane } from '@/components/ui/glass-pane';
 
-interface GradientExperienceProps {
+interface ExperienceProps {
   className?: string;
   id?: string;
   onBack: () => void;
 }
 
-export function GradientExperience({
-  className,
-  id,
-  onBack,
-}: GradientExperienceProps) {
+export function Experience({ className, id, onBack }: ExperienceProps) {
   return (
     <motion.section
       id={id}

@@ -22,7 +22,7 @@ function inferSectionFromPath(pathname: string): Section {
   return 'hero';
 }
 
-export function GlobalGradient() {
+export function GlobalBackground() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const pathname = usePathname();
 

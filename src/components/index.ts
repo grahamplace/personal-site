@@ -6,7 +6,7 @@ export { Badge } from './ui/badge';
 export { Stat } from './ui/stat';
 export { KPIList } from './ui/kpi-list';
 export { GlassPane } from './ui/glass-pane';
-export { GradientButton } from './ui/gradient-button';
+export { Button } from './ui/button';
 
 // Case Study Components
 export { CaseStudyHero } from './case-study/case-study-hero';
@@ -28,5 +28,5 @@ export { AutoHeaderGraphic } from './blog/auto-header-graphic';
 export { ThemeAccent } from './theme/theme-accent';
 
 // Home Components
-export { GradientContainer } from './home/gradient-container';
-export { GradientHeader } from './home/gradient-header';
+export { Container } from './home/container';
+export { Header } from './home/header';

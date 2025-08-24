@@ -1,5 +1,5 @@
-import { GradientContainer } from '@/components/home/gradient-container';
+import { Container } from '@/components/home/container';
 
 export default function Home() {
-  return <GradientContainer />;
+  return <Container />;
 }

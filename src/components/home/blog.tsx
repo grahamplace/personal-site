@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import { BlogCard } from '@/components/blog/blog-card';
 import { GlassPane } from '@/components/ui/glass-pane';
 
-interface GradientBlogProps {
+interface BlogProps {
   className?: string;
   id?: string;
   onBack: () => void;
@@ -42,7 +42,7 @@ const blogPosts = [
   },
 ];
 
-export function GradientBlog({ className, id }: GradientBlogProps) {
+export function Blog({ className, id }: BlogProps) {
   return (
     <motion.section
       id={id}

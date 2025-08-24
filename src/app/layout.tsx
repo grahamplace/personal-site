@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Raleway, Geist_Mono } from 'next/font/google';
 import { ThemeAccent } from '@/components/theme/theme-accent';
-import { GlobalGradient } from '@/components/theme/global-gradient';
+import { GlobalBackground } from '@/components/theme/global-background';
 import { GlobalHeader } from '@/components/theme/global-header';
 import { NavigationProvider } from '@/components/theme/global-navigation';
 import { BlogPostOverlay } from '@/components/blog/blog-post-overlay';
@@ -65,7 +65,7 @@ export default function RootLayout({
       >
         <NavigationProvider>
           <ThemeAccent />
-          <GlobalGradient />
+          <GlobalBackground />
           <GlobalHeader />
           <main className="min-h-screen">{children}</main>
           <BlogPostOverlay />

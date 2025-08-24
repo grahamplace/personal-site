@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { GradientHeader } from '@/components/home/gradient-header';
+import { Header } from '@/components/home/header';
 import { useNavigation, type Section } from './global-navigation';
 
 export function GlobalHeader() {
@@ -18,7 +18,7 @@ export function GlobalHeader() {
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="fixed left-0 right-0 top-0 z-50"
         >
-          <GradientHeader
+          <Header
             onNavigate={(s) => navigateToSection(s as Section)}
             currentSection={currentSection}
           />

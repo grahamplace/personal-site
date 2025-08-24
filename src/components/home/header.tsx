@@ -2,10 +2,10 @@
 
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { GradientButton } from '@/components/ui/gradient-button';
+import { Button } from '@/components/ui/button';
 import { getSectionAccentColor } from '@/lib/colors';
 
-interface GradientHeaderProps {
+interface HeaderProps {
   className?: string;
   onNavigate: (section: string) => void;
   onBack?: () => void;
@@ -20,11 +20,7 @@ const navigationItems = [
   { id: 'contact' as const, label: 'Contact' },
 ];
 
-export function GradientHeader({
-  className,
-  onNavigate,
-  currentSection,
-}: GradientHeaderProps) {
+export function Header({ className, onNavigate, currentSection }: HeaderProps) {
   return (
     <motion.header
       initial={{ y: -100, opacity: 0 }}
@@ -63,13 +59,13 @@ export function GradientHeader({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
             >
-              <GradientButton
+              <Button
                 onClick={() => onNavigate(item.id)}
                 isActive={currentSection === item.id}
                 accentColor={getSectionAccentColor(item.id)}
               >
                 {item.label}
-              </GradientButton>
+              </Button>
             </motion.div>
           ))}
         </motion.div>

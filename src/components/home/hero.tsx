@@ -5,13 +5,13 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import type { Section } from '@/components/theme/global-navigation';
 
-interface GradientHeroProps {
+interface HeroProps {
   className?: string;
   id?: string;
   onNavigate: (section: Section) => void;
 }
 
-export function GradientHero({ className, id, onNavigate }: GradientHeroProps) {
+export function Hero({ className, id, onNavigate }: HeroProps) {
   const verbs = ['build', 'code', 'ship', 'sell', 'work', 'design'];
   const [verbIndex, setVerbIndex] = useState(0);
 

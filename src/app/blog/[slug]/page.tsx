@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { allSlugs, blogPosts } from '@/content/blog/_manifest';
 import { GlassPane } from '@/components/ui/glass-pane';
 import { BlogPostClient } from '@/components/blog/blog-post-client';
-import { BlogRouteHeader } from '@/components/blog/blog-gradient';
+import { BlogRouteHeader } from '@/components/blog/blog-header';
 
 type Params = Promise<{ slug: string }>;
 
