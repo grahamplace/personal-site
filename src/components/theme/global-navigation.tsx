@@ -156,26 +156,30 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
   }, []);
 
   const navigateToSection = (section: Section) => {
-    // Exit hero mode if we're navigating to a different section
-    if (section !== 'hero') {
+    setIsNavigating(true);
+
+    if (section === 'hero') {
+      // Programmatically re-enter hero mode and scroll to top
+      setIsHeroMode(true);
+      setHeroProgress(0);
+      setCurrentSection('hero');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // Exit hero mode when navigating away
       setIsHeroMode(false);
       setHeroProgress(1);
-    }
-    // TEMP DISABLE: Prevent programmatic navigation back to hero
-    if (section === 'hero') return;
+      setCurrentSection(section);
 
-    setIsNavigating(true);
-    setCurrentSection(section); // Immediately set the target section
-
-    const el = document.getElementById(section);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const el = document.getElementById(section);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
 
     // Re-enable scroll spy after scroll animation completes
     setTimeout(() => {
       setIsNavigating(false);
-    }, 1000); // Slightly longer than typical smooth scroll duration
+    }, 1000);
   };
 
   const openBlogPost = (slug: string) => {
