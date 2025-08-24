@@ -170,10 +170,20 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
       setHeroProgress(1);
       setCurrentSection(section);
 
-      const el = document.getElementById(section);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      // Sections mount after hero exits; wait until the target exists, then scroll
+      const startTimeMs = performance.now();
+      const timeoutMs = 1200; // slightly longer than exit animation
+      const attemptScroll = () => {
+        const el = document.getElementById(section);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+        if (performance.now() - startTimeMs < timeoutMs) {
+          requestAnimationFrame(attemptScroll);
+        }
+      };
+      requestAnimationFrame(attemptScroll);
     }
 
     // Re-enable scroll spy after scroll animation completes

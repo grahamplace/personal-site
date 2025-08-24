@@ -50,7 +50,7 @@ export function GradientBlog({ className, id }: GradientBlogProps) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -50 }}
       transition={{ duration: 0.8, ease: 'easeOut', delay: 0.4 }}
-      className={cn('relative', className)}
+      className={cn('relative scroll-mt-56', className)}
     >
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-4xl px-6 pb-8 pt-24 md:pb-12 md:pt-32">
