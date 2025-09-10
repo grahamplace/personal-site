@@ -45,10 +45,10 @@ export function Contact({ className, id, onBack }: ContactProps) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -50 }}
       transition={{ duration: 0.8, ease: 'easeOut', delay: 0.6 }}
-      className={cn('relative scroll-mt-56', className)}
+      className={cn('relative scroll-mt-48', className)}
     >
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-4xl px-6 pb-8 pt-24 md:pb-12 md:pt-32">
+      <div className="relative z-10 mx-auto max-w-4xl px-6 pb-8 pt-16 md:pb-12 md:pt-24">
         {/* Contact Methods */}
         <GlassPane variant="default" className="mx-auto max-w-4xl">
           <motion.div

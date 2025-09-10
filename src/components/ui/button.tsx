@@ -24,7 +24,7 @@ export function Button({
       whileTap={{ scale: 0.95 }}
       onClick={onClick}
       className={cn(
-        'w-40 rounded-lg border px-8 py-4 text-lg font-medium shadow-lg backdrop-blur-sm transition-all duration-300',
+        'w-36 rounded-lg border px-6 py-3 text-base font-medium shadow-lg backdrop-blur-sm transition-all duration-300',
         isActive
           ? 'border-white/50 bg-white/40 text-white shadow-xl'
           : 'border-white/30 bg-white/20 text-white hover:bg-white/30 hover:shadow-xl',

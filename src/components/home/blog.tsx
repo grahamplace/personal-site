@@ -50,10 +50,10 @@ export function Blog({ className, id }: BlogProps) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -50 }}
       transition={{ duration: 0.8, ease: 'easeOut', delay: 0.4 }}
-      className={cn('relative scroll-mt-56', className)}
+      className={cn('relative scroll-mt-48', className)}
     >
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-4xl px-6 pb-8 pt-24 md:pb-12 md:pt-32">
+      <div className="relative z-10 mx-auto max-w-4xl px-6 pb-8 pt-16 md:pb-12 md:pt-24">
         {/* Blog Posts Grid */}
         <GlassPane variant="default" className="mx-auto max-w-5xl">
           <motion.div

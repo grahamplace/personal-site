@@ -32,15 +32,15 @@ export function Header({ className, onNavigate, currentSection }: HeaderProps) {
         className
       )}
     >
-      <div className="mx-auto max-w-7xl px-6 py-8">
+      <div className="mx-auto max-w-7xl px-6 py-4">
         {/* Name */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-8 text-center"
+          className="mb-4 text-center"
         >
-          <h1 className="font-raleway text-4xl font-black text-white sm:text-5xl lg:text-6xl">
+          <h1 className="font-raleway text-3xl font-black text-white sm:text-4xl lg:text-5xl">
             Graham Place
           </h1>
         </motion.div>
@@ -50,7 +50,7 @@ export function Header({ className, onNavigate, currentSection }: HeaderProps) {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex flex-col justify-center gap-4 sm:flex-row"
+          className="flex flex-col justify-center gap-3 sm:flex-row"
         >
           {navigationItems.map((item, index) => (
             <motion.div

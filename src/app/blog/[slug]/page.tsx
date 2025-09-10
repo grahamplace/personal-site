@@ -23,7 +23,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
       <BlogRouteHeader />
 
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-3xl px-6 pb-24 pt-64">
+      <div className="relative z-10 mx-auto max-w-3xl px-6 pb-24 pt-48">
         <GlassPane variant="default">
           <BlogPostClient slug={slug} />
         </GlassPane>

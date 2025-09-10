@@ -18,7 +18,7 @@ export function Experience({ className, id, onBack }: ExperienceProps) {
       initial={false}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
-      className={cn('relative mt-40 scroll-mt-56 md:mt-56', className)}
+      className={cn('relative mt-32 scroll-mt-48 md:mt-40', className)}
     >
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-4xl px-6 pb-8 pt-12 md:pb-12 md:pt-12">
