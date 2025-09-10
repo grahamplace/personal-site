@@ -143,22 +143,35 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
       setIsHeroMode(false);
       setCurrentSection(section);
 
-      const el = document.getElementById(section);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else {
-        // Fallback in the unlikely event element is not found
-        requestAnimationFrame(() => {
-          const el2 = document.getElementById(section);
-          el2?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-      }
+      // Scroll using manual offset accounting for current header height
+      const scrollWithHeaderOffset = () => {
+        const header = document.getElementById('site-header');
+        const target = document.getElementById(section);
+        if (!target) return;
+
+        const headerHeight = header?.getBoundingClientRect().height ?? 0;
+        const targetTop = target.getBoundingClientRect().top + window.scrollY;
+        const y = Math.max(0, targetTop - headerHeight - 8); // 8px breathing room
+
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      };
+
+      // Retry a few times to handle in-flight header height transitions
+      let attempts = 0;
+      const tryScroll = () => {
+        attempts++;
+        scrollWithHeaderOffset();
+        if (attempts < 3) {
+          setTimeout(tryScroll, 90);
+        }
+      };
+      requestAnimationFrame(tryScroll);
     }
 
     // Re-enable scroll spy after scroll animation completes
     setTimeout(() => {
       setIsNavigating(false);
-    }, 800);
+    }, 900);
   };
 
   const openBlogPost = (slug: string) => {

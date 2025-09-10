@@ -1,23 +1,48 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
 export function BlogRouteHeader() {
   const [isCompact, setIsCompact] = useState(false);
+  const compactTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
+    const clearTimer = () => {
+      if (compactTimerRef.current != null) {
+        clearTimeout(compactTimerRef.current);
+        compactTimerRef.current = null;
+      }
+    };
+
     const onScroll = () => {
       const y = window.scrollY || window.pageYOffset;
-      setIsCompact(y > 24);
+      const pastThreshold = y > 24;
+
+      if (pastThreshold) {
+        if (!isCompact && compactTimerRef.current == null) {
+          compactTimerRef.current = window.setTimeout(() => {
+            setIsCompact(true);
+            compactTimerRef.current = null;
+          }, 1000);
+        }
+      } else {
+        clearTimer();
+        if (isCompact) setIsCompact(false);
+      }
     };
+
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      clearTimer();
+    };
+  }, [isCompact]);
 
   return (
     <motion.header
+      id="site-header"
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}

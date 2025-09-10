@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { getSectionAccentColor } from '@/lib/colors';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface HeaderProps {
   className?: string;
@@ -23,19 +23,46 @@ const navigationItems = [
 
 export function Header({ className, onNavigate, currentSection }: HeaderProps) {
   const [isCompact, setIsCompact] = useState(false);
+  const compactTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
+    const clearTimer = () => {
+      if (compactTimerRef.current != null) {
+        clearTimeout(compactTimerRef.current);
+        compactTimerRef.current = null;
+      }
+    };
+
     const onScroll = () => {
       const y = window.scrollY || window.pageYOffset;
-      setIsCompact(y > 24);
+      const pastThreshold = y > 24;
+
+      if (pastThreshold) {
+        // Delay shrink by 500ms; ignore if already compact or timer exists
+        if (!isCompact && compactTimerRef.current == null) {
+          compactTimerRef.current = window.setTimeout(() => {
+            setIsCompact(true);
+            compactTimerRef.current = null;
+          }, 500);
+        }
+      } else {
+        // Cancel pending shrink and expand immediately
+        clearTimer();
+        if (isCompact) setIsCompact(false);
+      }
     };
+
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      clearTimer();
+    };
+  }, [isCompact]);
 
   return (
     <motion.header
+      id="site-header"
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: -100, opacity: 0 }}
