@@ -38,12 +38,12 @@ export function Header({ className, onNavigate, currentSection }: HeaderProps) {
       const pastThreshold = y > 24;
 
       if (pastThreshold) {
-        // Delay shrink by 500ms; ignore if already compact or timer exists
+        // Delay shrink by 200ms; ignore if already compact or timer exists
         if (!isCompact && compactTimerRef.current == null) {
           compactTimerRef.current = window.setTimeout(() => {
             setIsCompact(true);
             compactTimerRef.current = null;
-          }, 500);
+          }, 200);
         }
       } else {
         // Cancel pending shrink and expand immediately
@@ -77,8 +77,10 @@ export function Header({ className, onNavigate, currentSection }: HeaderProps) {
         transition={{ duration: 0.3, ease: 'easeOut' }}
         className="mx-auto max-w-7xl px-6"
         style={{
-          paddingTop: isCompact ? 8 : 16,
-          paddingBottom: isCompact ? 8 : 16,
+          // paddingTop: isCompact ? 8 : 16,
+          // paddingBottom: isCompact ? 8 : 16,
+          paddingTop: 12,
+          paddingBottom: 12,
         }}
       >
         {/* Name */}
