@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export function BlogRouteHeader() {
   const [isCompact, setIsCompact] = useState(false);
@@ -32,20 +32,21 @@ export function BlogRouteHeader() {
           paddingBottom: isCompact ? 8 : 16,
         }}
       >
-        <AnimatePresence initial={false}>
-          {!isCompact && (
-            <motion.h1
-              key="blog-title"
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-              className="font-raleway text-3xl font-black text-white sm:text-4xl"
-            >
-              Graham Place
-            </motion.h1>
-          )}
-        </AnimatePresence>
+        <motion.h1
+          layout
+          initial={false}
+          animate={{
+            opacity: isCompact ? 0 : 1,
+            y: isCompact ? -6 : 0,
+            height: isCompact ? 0 : 'auto',
+            marginBottom: isCompact ? 0 : 0,
+          }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
+          className="font-raleway overflow-hidden text-3xl font-black text-white sm:text-4xl"
+          aria-hidden={isCompact}
+        >
+          Graham Place
+        </motion.h1>
       </motion.div>
     </motion.header>
   );

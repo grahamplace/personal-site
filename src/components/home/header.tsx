@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { getSectionAccentColor } from '@/lib/colors';
@@ -55,25 +55,27 @@ export function Header({ className, onNavigate, currentSection }: HeaderProps) {
         }}
       >
         {/* Name */}
-        <AnimatePresence initial={false}>
-          {!isCompact && (
-            <motion.div
-              key="title"
-              initial={{ opacity: 0, y: -12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-              className="mb-4 text-center"
-            >
-              <h1 className="font-raleway text-3xl font-black text-white sm:text-4xl lg:text-5xl">
-                Graham Place
-              </h1>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <motion.div
+          layout
+          initial={false}
+          animate={{
+            opacity: isCompact ? 0 : 1,
+            y: isCompact ? -8 : 0,
+            height: isCompact ? 0 : 'auto',
+            marginBottom: isCompact ? 0 : 16,
+          }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
+          className="overflow-hidden text-center"
+          aria-hidden={isCompact}
+        >
+          <h1 className="font-raleway text-3xl font-black text-white sm:text-4xl lg:text-5xl">
+            Graham Place
+          </h1>
+        </motion.div>
 
         {/* Navigation */}
         <motion.div
+          layout
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
