@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import Aspect from '@/components/Aspect';
 
 interface ImageStripProps {
   images: string[];
@@ -47,11 +48,13 @@ export function ImageStrip({
             transition={{ duration: 0.6, delay: index * 0.1 }}
             className="overflow-hidden rounded-lg shadow-lg"
           >
-            <img
-              src={image}
-              alt={`Screenshot ${index + 1}`}
-              className="h-auto w-full"
-            />
+            <Aspect ratio={16 / 9}>
+              <img
+                src={image}
+                alt={`Screenshot ${index + 1}`}
+                className="h-full w-full object-cover"
+              />
+            </Aspect>
           </motion.div>
         ))}
       </div>
@@ -69,11 +72,13 @@ export function ImageStrip({
           transition={{ duration: 0.6, delay: index * 0.1 }}
           className="overflow-hidden rounded-lg shadow-lg"
         >
-          <img
-            src={image}
-            alt={`Screenshot ${index + 1}`}
-            className="h-auto w-full"
-          />
+          <Aspect ratio={16 / 9}>
+            <img
+              src={image}
+              alt={`Screenshot ${index + 1}`}
+              className="h-full w-full object-cover"
+            />
+          </Aspect>
         </motion.div>
       ))}
     </div>

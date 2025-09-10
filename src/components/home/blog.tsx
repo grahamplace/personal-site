@@ -8,7 +8,7 @@ import { GlassPane } from '@/components/ui/glass-pane';
 interface BlogProps {
   className?: string;
   id?: string;
-  onBack: () => void;
+  onBack?: () => void;
 }
 
 // Sample blog posts data

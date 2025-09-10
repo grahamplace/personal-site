@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Tag } from '../ui/tag';
+import Aspect from '@/components/Aspect';
 import { KPIList } from '../ui/kpi-list';
 
 interface CaseStudyHeroProps {
@@ -93,7 +94,13 @@ export function CaseStudyHero({
           transition={{ duration: 0.6, delay: 0.2 }}
           className="relative overflow-hidden rounded-lg shadow-lg"
         >
-          <img src={image} alt={title} className="h-auto w-full" />
+          <Aspect ratio={16 / 9}>
+            <img
+              src={image}
+              alt={title}
+              className="h-full w-full object-cover"
+            />
+          </Aspect>
         </motion.div>
       )}
     </motion.div>

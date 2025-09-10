@@ -1,6 +1,7 @@
 'use client';
 
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 import { useNavigation } from '@/components/theme/global-navigation';
 import { Hero } from './hero';
@@ -140,35 +141,41 @@ export function Container() {
 
   return (
     <div className="relative min-h-screen overflow-x-hidden">
-      {/* Hero section with exit animation */}
-      <AnimatePresence mode="wait">
+      {/* Fixed hero overlay that fades out instead of unmounting content */}
+      <AnimatePresence initial={false}>
         {isHeroMode && (
-          <Hero key="hero" id="hero" onNavigate={navigateToSection} />
+          <motion.div
+            key="hero-overlay"
+            className="fixed inset-0 z-20"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+          >
+            <Hero id="hero" onNavigate={navigateToSection} />
+          </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Other sections with entrance animation */}
-      <AnimatePresence mode="wait">
-        {!isHeroMode && (
-          <>
-            <Experience
-              key="experience"
-              id="experience"
-              onBack={() => navigateToSection('hero')}
-            />
-            <Blog
-              key="blog"
-              id="blog"
-              onBack={() => navigateToSection('hero')}
-            />
-            <Contact
-              key="contact"
-              id="contact"
-              onBack={() => navigateToSection('hero')}
-            />
-          </>
+      {/* Always-mounted sections to avoid layout reflow/CLS */}
+      <motion.div
+        initial={false}
+        animate={{ opacity: isHeroMode ? 0 : 1 }}
+        transition={{
+          duration: 0.5,
+          ease: 'easeOut',
+          delay: isHeroMode ? 0 : 0.25,
+        }}
+        className={cn(
+          'relative z-10',
+          isHeroMode ? 'pointer-events-none select-none' : ''
         )}
-      </AnimatePresence>
+        aria-hidden={isHeroMode}
+      >
+        <Experience id="experience" onBack={() => navigateToSection('hero')} />
+        <Blog id="blog" onBack={() => navigateToSection('hero')} />
+        <Contact id="contact" onBack={() => navigateToSection('hero')} />
+      </motion.div>
     </div>
   );
 }

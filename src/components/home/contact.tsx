@@ -7,7 +7,7 @@ import { GlassPane } from '@/components/ui/glass-pane';
 interface ContactProps {
   className?: string;
   id?: string;
-  onBack: () => void;
+  onBack?: () => void;
 }
 
 const contactMethods = [

@@ -135,35 +135,30 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
     setIsNavigating(true);
 
     if (section === 'hero') {
-      // Programmatically re-enter hero mode and scroll to top
       setIsHeroMode(true);
       setCurrentSection('hero');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      // Exit hero mode when navigating away
+      // Make hero overlay fade, but keep content mounted; scroll immediately
       setIsHeroMode(false);
       setCurrentSection(section);
 
-      // Sections mount after hero exits; wait until the target exists, then scroll
-      const startTimeMs = performance.now();
-      const timeoutMs = 1200; // slightly longer than exit animation
-      const attemptScroll = () => {
-        const el = document.getElementById(section);
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          return;
-        }
-        if (performance.now() - startTimeMs < timeoutMs) {
-          requestAnimationFrame(attemptScroll);
-        }
-      };
-      requestAnimationFrame(attemptScroll);
+      const el = document.getElementById(section);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        // Fallback in the unlikely event element is not found
+        requestAnimationFrame(() => {
+          const el2 = document.getElementById(section);
+          el2?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
     }
 
     // Re-enable scroll spy after scroll animation completes
     setTimeout(() => {
       setIsNavigating(false);
-    }, 1000);
+    }, 800);
   };
 
   const openBlogPost = (slug: string) => {

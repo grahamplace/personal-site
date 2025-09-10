@@ -41,6 +41,11 @@ body {
   scroll-behavior: smooth;
 }
 
+/* Reserve space for the scrollbar to avoid viewport width jumps */
+html {
+  scrollbar-gutter: stable both-edges;
+}
+
 ::selection {
   background: rgba(255, 255, 255, 0.35);
   color: #111827; /* gray-900 */
@@ -50,4 +55,82 @@ body {
   width: 100%;
   height: 100%;
   /* CSS variables will be set dynamically from colors.ts */
+}
+
+/* Scroll snapping helpers (optional, used on /scroll) */
+.snap-y {
+  scroll-snap-type: y proximity;
+}
+.snap-start {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* --- Scroll-driven Sections (CSS Scroll Timelines) --- */
+@supports (animation-timeline: auto) {
+  @scroll-timeline main-timeline {
+    source: auto;
+    orientation: block;
+    scroll-offsets:
+      start 0,
+      end 100%;
+  }
+
+  .section {
+    view-timeline-name: --section;
+    view-timeline-axis: block;
+  }
+
+  .enter-anim {
+    animation: section-enter 1 both;
+    animation-timeline: --section;
+    animation-range: entry 0% cover 60%;
+  }
+
+  .exit-anim {
+    animation: section-exit 1 both;
+    animation-timeline: --section;
+    animation-range: exit 0% exit 100%;
+  }
+
+  @keyframes section-enter {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes section-exit {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0.2;
+      transform: translateY(-40px);
+    }
+  }
+
+  .pin-wrap {
+    position: relative;
+  }
+  .pin {
+    position: sticky;
+    top: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    will-change: transform, opacity;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enter-anim,
+  .exit-anim {
+    animation: none !important;
+  }
 }
