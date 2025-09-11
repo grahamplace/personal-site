@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigation } from '@/components/theme/global-navigation';
 import { Hero } from './hero';
 import { Experience } from './experience';
@@ -138,6 +138,59 @@ export function Container() {
   //     triggerSwallowing();
   //   }
   // }, [scrollDirection, isHeroMode]);
+
+  // Intercept any downward scroll while hero is visible and trigger the same
+  // navigation as the down-arrow button.
+  const hasInterceptedRef = useRef(false);
+
+  useEffect(() => {
+    if (!isHeroMode) {
+      hasInterceptedRef.current = false;
+      return;
+    }
+
+    const onWheel = (e: WheelEvent) => {
+      if (hasInterceptedRef.current) {
+        e.preventDefault();
+        return;
+      }
+      if (e.deltaY > 0) {
+        e.preventDefault();
+        e.stopPropagation();
+        hasInterceptedRef.current = true;
+        navigateToSection('experience');
+      }
+    };
+
+    let touchStartY = 0;
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0]?.clientY ?? 0;
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      if (hasInterceptedRef.current) {
+        e.preventDefault();
+        return;
+      }
+      const currentY = e.touches[0]?.clientY ?? 0;
+      const movedUp = touchStartY - currentY > 8; // up swipe implies downward scroll intent
+      if (movedUp) {
+        e.preventDefault();
+        e.stopPropagation();
+        hasInterceptedRef.current = true;
+        navigateToSection('experience');
+      }
+    };
+
+    window.addEventListener('wheel', onWheel, { passive: false });
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: false });
+
+    return () => {
+      window.removeEventListener('wheel', onWheel);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchmove', onTouchMove);
+    };
+  }, [isHeroMode, navigateToSection]);
 
   return (
     <div className="relative min-h-screen overflow-x-hidden">
