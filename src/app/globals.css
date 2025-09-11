@@ -43,7 +43,7 @@ body {
 
 /* Reserve space for the scrollbar to avoid viewport width jumps */
 html {
-  scrollbar-gutter: stable both-edges;
+  scrollbar-gutter: stable;
 }
 
 ::selection {
