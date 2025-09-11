@@ -108,7 +108,7 @@ export function Header({ className, onNavigate, currentSection }: HeaderProps) {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-col justify-center gap-3 sm:flex-row"
+          className="flex justify-center gap-1 px-4 sm:flex-row sm:gap-3"
         >
           {navigationItems.map((item, index) => (
             <motion.div
