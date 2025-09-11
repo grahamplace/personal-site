@@ -478,6 +478,16 @@ class MiniGl {
   render() {
     (this.gl.clearColor(0, 0, 0, 0),
       this.gl.clearDepth(1),
+      // Full clear first
+      this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT),
+      // Scissor clear a 1px row at the very bottom to guarantee no seam
+      this.gl.enable(this.gl.SCISSOR_TEST),
+      this.gl.scissor(0, 0, this.width || this.canvas.width, 1),
+      this.gl.clearColor(0, 0, 0, 1),
+      this.gl.clear(this.gl.COLOR_BUFFER_BIT),
+      this.gl.disable(this.gl.SCISSOR_TEST),
+      // Restore clear color for subsequent clears
+      this.gl.clearColor(0, 0, 0, 0),
       this.meshes.forEach((e) => e.draw()));
   }
 }
@@ -531,6 +541,11 @@ class Gradient {
       e(this, 'geometry', void 0),
       e(this, 'minigl', void 0),
       e(this, 'scrollObserver', void 0),
+      // Device and sizing helpers
+      e(this, 'cssWidth', void 0),
+      e(this, 'cssHeight', void 0),
+      e(this, 'dpr', 1),
+      e(this, 'overdrawPx', 0),
       e(this, 'amp', 320),
       e(this, 'seed', 5),
       e(this, 'freqX', 14e-5),
@@ -553,15 +568,23 @@ class Gradient {
         ((this.isScrolling = !1), this.isIntersecting && this.play());
       }),
       e(this, 'resize', () => {
-        ((this.width = window.innerWidth),
+        // Account for device pixel ratio to match framebuffer size
+        // with on-screen pixels and reduce scaling artifacts.
+        ((this.cssWidth = window.innerWidth),
+          (this.cssHeight = window.innerHeight),
+          (this.dpr = Math.max(1, window.devicePixelRatio || 1)),
+          (this.width = Math.floor(this.cssWidth * this.dpr)),
+          (this.height = Math.floor(this.cssHeight * this.dpr)),
           this.minigl.setSize(this.width, this.height),
           this.minigl.setOrthographicCamera(),
-          (this.xSegCount = Math.ceil(this.width * this.conf.density[0])),
-          (this.ySegCount = Math.ceil(this.height * this.conf.density[1])),
+          // Keep segment density based on CSS pixels to avoid excessive geometry on high-DPR screens
+          (this.xSegCount = Math.ceil(this.cssWidth * this.conf.density[0])),
+          (this.ySegCount = Math.ceil(this.cssHeight * this.conf.density[1])),
           this.mesh.geometry.setTopology(this.xSegCount, this.ySegCount),
-          this.mesh.geometry.setSize(this.width, this.height),
+          (this.overdrawPx = Math.ceil(4 * this.dpr)),
+          this.mesh.geometry.setSize(this.width, this.height + this.overdrawPx),
           (this.mesh.material.uniforms.u_shadow_power.value =
-            this.width < 600 ? 5 : 6));
+            this.cssWidth < 600 ? 5 : 6));
       }),
       e(this, 'handleMouseDown', (e) => {
         this.isGradientLegendVisible &&
@@ -650,12 +673,7 @@ class Gradient {
             )) * u_vertDeform.noiseAmp;
           
             // Fade noise to zero at edges
-            // noise *= 1.0 - pow(abs(uvNorm.y), 2.0);
-            
-            noise = smoothstep(0.0, 1.0, noise); // Apply smoothing
-            
-            // Clamp to 0
-            noise = max(0.0, noise);
+            noise *= 1.0 - pow(abs(uvNorm.y), 2.0);
           
             vec3 pos = vec3(
               position.x,
@@ -773,7 +791,7 @@ class Gradient {
             value: -0.5,
           }),
           offsetBottom: new this.minigl.Uniform({
-            value: -0.5,
+            value: -0.5025,
           }),
           noiseFreq: new this.minigl.Uniform({
             value: [3, 4],
