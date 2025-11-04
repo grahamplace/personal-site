@@ -4,11 +4,11 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { BlogCard } from '@/components/blog/blog-card';
 import { GlassPane } from '@/components/ui/glass-pane';
+import { useNavigation } from '@/components/theme/global-navigation';
 
 interface BlogProps {
   className?: string;
   id?: string;
-  onBack?: () => void;
 }
 
 // Sample blog posts data
@@ -43,40 +43,35 @@ const blogPosts = [
 ];
 
 export function Blog({ className, id }: BlogProps) {
+  const { isHeroMode } = useNavigation();
   return (
-    <motion.section
-      id={id}
-      initial={{ opacity: 0, y: 100 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -50 }}
-      transition={{ duration: 0.8, ease: 'easeOut', delay: 0.4 }}
-      className={cn('relative scroll-mt-48', className)}
-    >
+    <section id={id} className={cn('relative scroll-mt-48', className)}>
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-4xl px-6 pb-8 pt-16 md:pb-12 md:pt-24">
-        {/* Blog Posts Grid */}
-        <GlassPane variant="default" className="mx-auto max-w-5xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="grid gap-4 sm:grid-cols-1 md:gap-6 lg:grid-cols-2"
-          >
-            {blogPosts.map((post, index) => (
-              <motion.div
-                key={post.slug}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-              >
-                <BlogCard {...post} />
-              </motion.div>
-            ))}
-          </motion.div>
-        </GlassPane>
+        {/* Blog Pane (slide entire frosted pane) */}
+        <motion.div
+          initial={false}
+          animate={isHeroMode ? { y: '110vh' } : { y: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          style={{ willChange: 'transform' }}
+        >
+          <GlassPane variant="default" className="mx-auto max-w-5xl">
+            <div className="grid gap-4 sm:grid-cols-1 md:gap-6 lg:grid-cols-2">
+              {blogPosts.map((post, index) => (
+                <motion.div
+                  key={post.slug}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
+                >
+                  <BlogCard {...post} />
+                </motion.div>
+              ))}
+            </div>
+          </GlassPane>
+        </motion.div>
       </div>
-    </motion.section>
+    </section>
   );
 }

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { Tag } from '../ui/tag';
 import Aspect from '@/components/Aspect';
@@ -95,11 +96,7 @@ export function CaseStudyHero({
           className="relative overflow-hidden rounded-lg shadow-lg"
         >
           <Aspect ratio={16 / 9}>
-            <img
-              src={image}
-              alt={title}
-              className="h-full w-full object-cover"
-            />
+            <Image src={image} alt={title} fill className="object-cover" />
           </Aspect>
         </motion.div>
       )}

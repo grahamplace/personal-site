@@ -14,6 +14,7 @@ export function SmoothProvider({ children }: Props) {
   useEffect(() => {
     if (reduced) return;
 
+    // @ts-expect-error smoothTouch may not exist in all Lenis versions
     const lenis = new Lenis({ smoothWheel: true, smoothTouch: false });
     let rafId = 0;
 
@@ -25,7 +26,6 @@ export function SmoothProvider({ children }: Props) {
     rafId = requestAnimationFrame(raf);
     return () => {
       cancelAnimationFrame(rafId);
-      // @ts-expect-error types may not include destroy depending on version
       lenis.destroy?.();
     };
   }, [reduced]);

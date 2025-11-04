@@ -84,24 +84,17 @@ export function Container() {
       </AnimatePresence>
 
       {/* Always-mounted sections to avoid layout reflow/CLS */}
-      <motion.div
-        initial={false}
-        animate={{ opacity: isHeroMode ? 0 : 1 }}
-        transition={{
-          duration: 0.5,
-          ease: 'easeOut',
-          delay: isHeroMode ? 0 : 0.25,
-        }}
+      <div
         className={cn(
           'relative z-10',
           isHeroMode ? 'pointer-events-none select-none' : ''
         )}
         aria-hidden={isHeroMode}
       >
-        <Experience id="experience" onBack={() => navigateToSection('hero')} />
-        <Blog id="blog" onBack={() => navigateToSection('hero')} />
-        <Contact id="contact" onBack={() => navigateToSection('hero')} />
-      </motion.div>
+        <Experience id="experience" />
+        <Blog id="blog" />
+        <Contact id="contact" />
+      </div>
     </div>
   );
 }

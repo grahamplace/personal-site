@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import Aspect from '@/components/Aspect';
 
@@ -23,12 +24,13 @@ export function ImageStrip({
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="h-48 w-80 flex-shrink-0 overflow-hidden rounded-lg shadow-lg"
+              className="relative h-48 w-80 flex-shrink-0 overflow-hidden rounded-lg shadow-lg"
             >
-              <img
+              <Image
                 src={image}
                 alt={`Screenshot ${index + 1}`}
-                className="h-full w-full object-cover"
+                fill
+                className="object-cover"
               />
             </motion.div>
           ))}
@@ -49,10 +51,11 @@ export function ImageStrip({
             className="overflow-hidden rounded-lg shadow-lg"
           >
             <Aspect ratio={16 / 9}>
-              <img
+              <Image
                 src={image}
                 alt={`Screenshot ${index + 1}`}
-                className="h-full w-full object-cover"
+                fill
+                className="object-cover"
               />
             </Aspect>
           </motion.div>
@@ -73,10 +76,11 @@ export function ImageStrip({
           className="overflow-hidden rounded-lg shadow-lg"
         >
           <Aspect ratio={16 / 9}>
-            <img
+            <Image
               src={image}
               alt={`Screenshot ${index + 1}`}
-              className="h-full w-full object-cover"
+              fill
+              className="object-cover"
             />
           </Aspect>
         </motion.div>

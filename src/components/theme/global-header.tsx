@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Header } from '@/components/home/header';
 import { useNavigation, type Section } from './global-navigation';
 
