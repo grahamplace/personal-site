@@ -9,7 +9,8 @@ interface TagProps {
     | 'secondary'
     | 'success'
     | 'warning'
-    | 'error';
+    | 'error'
+    | 'glass';
   size?: 'sm' | 'md' | 'lg';
   className?: string;
 }
@@ -27,6 +28,8 @@ export function Tag({
     success: 'bg-green-100 text-green-800',
     warning: 'bg-sandstone/10 text-sandstone',
     error: 'bg-sunsetOrange/10 text-sunsetOrange',
+    glass:
+      'border border-white/15 bg-white/10 text-white/90 shadow-[0_1px_2px_rgba(15,23,42,0.35)] backdrop-blur-sm',
   };
 
   const sizeClasses = {

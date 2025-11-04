@@ -1,71 +1,124 @@
 [
   {
-    "company": "Opendoor",
-    "role": "Senior Software Engineer — Data Infra/Data Services",
-    "start": "2018-01-01",
-    "end": "2023-05-01",
-    "summary": "Scaled data infrastructure and services; reliability and growth at production scale.",
+    "company": "Summation",
+    "role": "Forward Deployed Engineering Lead (Contract)",
+    "start": "2025-03-01",
+    "end": "2025-05-01",
+    "summary": "Built the forward deployed engineering function and delivered AI-driven demos that unlocked new enterprise revenue.",
     "highlights": [
-      "Owned data services powering 10+ internal teams",
-      "Improved pipeline reliability to >99.9% on critical paths",
-      "Led cross-functional effort to reduce infra costs by 30%"
+      "Defined the forward deployed engineering function, including role scope, hiring process, and candidate evaluation.",
+      "Led technical implementation of Summation's AI-powered financial assistant for a 6-figure enterprise contract serving 20K+ employees.",
+      "Developed a Python-based CLI with OpenAI Deep Research to generate realistic synthetic financial datasets and fully customized demo environments in under 30 minutes.",
+      "Equipped sales with production-ready demos populated with AI-generated business insights, accelerating enterprise deal cycles."
     ],
     "metrics": {
-      "years": 5.2,
-      "teamsImpacted": "10+",
-      "reliability": "99.9%+"
+      "customerEmployees": "20K+",
+      "contractValue": "6-figure",
+      "demoSetupTime": "<30 minutes"
     },
-    "tech": ["Python", "Go", "Snowflake", "Airflow", "Kafka", "GCP", "AWS"]
+    "tech": [
+      "Python",
+      "DuckDB SQL",
+      "Polars",
+      "OpenAI API",
+      "React",
+      "TypeScript"
+    ]
   },
   {
-    "company": "Foundation (YC)",
-    "role": "Co-founder & CTO",
+    "company": "Foundation (YC S23)",
+    "role": "Technical Co-Founder & CTO",
     "start": "2023-06-01",
-    "end": "2024-08-01",
-    "summary": "Full-stack web & mobile for homebuilder consumer SaaS; led eng and product.",
+    "end": "2024-12-01",
+    "summary": "Founded and scaled a YC-backed enterprise SaaS platform for homebuilders, leading product, engineering, and GTM from inception.",
     "highlights": [
-      "Launched web + mobile apps; scaled to paying users",
-      "Managed engineers; CI/CD and observability from day 1",
-      "Shipped monetization features and pricing experiments"
+      "Grew the company from idea to $300K+ ACV with multiple top-tier homebuilder customers.",
+      "Hired, led, and mentored a six-person engineering team while establishing technical culture and scalable development practices.",
+      "Architected and shipped the initial white-labeled B2B2C web and mobile platform for enterprise homebuilders.",
+      "Delivered multiple product lines, including an all-in-one closing platform, builder–buyer chat app, and LLM-powered data ingestion and cleaning tooling.",
+      "Scaled infrastructure and security to meet enterprise-grade performance requirements while accelerating release cadence."
     ],
     "metrics": {
-      "teamSize": "3–6",
-      "mrr": "$5,000+",
-      "retention": "85% 3-month"
+      "acv": "$300K+",
+      "teamSize": 6,
+      "productLines": 3
     },
     "tech": [
-      "Next.js",
-      "React Native",
-      "Expo",
+      "TypeScript",
       "Postgres",
-      "Stripe",
+      "Next.js",
+      "React",
+      "React Native (Expo)",
+      "Auth0",
+      "Redis",
+      "AWS",
+      "Neon Serverless Postgres",
+      "GitHub Actions",
       "Vercel",
-      "Cloudflare"
+      "Inngest",
+      "OpenAI API",
+      "Datadog",
+      "Sentry",
+      "PagerDuty"
     ]
   },
   {
-    "company": "Indie Projects",
-    "role": "Indie Dev / Solo-preneur",
-    "start": "2021-01-01",
-    "end": null,
-    "summary": "Multiple monetized micro-products; focus on product velocity and polish.",
+    "company": "Opendoor",
+    "role": "Senior Software Engineer — Data Infrastructure",
+    "start": "2016-08-01",
+    "end": "2023-06-01",
+    "summary": "Led Opendoor's data platform strategy and execution, powering pricing, risk, and operations through resilient infrastructure.",
     "highlights": [
-      "Built 3 products with paying customers",
-      "Optimized funnels and onboarding with measurable lift",
-      "Automated ops + analytics for lean ops"
+      "Served as tech lead for Data Infrastructure, managing the Kubernetes-based platform for all Spark/ML workloads with hundreds of users and over $1M/month cloud spend.",
+      "Designed and implemented the Go/Postgres backend that ingested live MLS data with <5 minute latency, normalizing formats and serving web/mobile via Elasticsearch, gRPC, and GraphQL APIs.",
+      "Led architecture of the enterprise data warehouse—ETL pipelines, modeling, testing, and deployment—while migrating from Google Cloud (BigQuery, GCS) to AWS (RDS, S3, Snowflake).",
+      "Maintained and enhanced data-serving microservices, including address standardization, geospatial datasets (PostGIS), and normalized realtor databases for partner programs.",
+      "Partnered with program, data science, and operations teams to execute zero-downtime migrations, cut ML workflow latency and cost, and deliver validated data for new city launches."
     ],
     "metrics": {
-      "projects": 3,
-      "revenue": "$8,000+/yr",
-      "users": "2,000+"
+      "cloudSpend": "$1M+/month",
+      "platformUsers": "Hundreds",
+      "dataLatency": "<5 minutes"
     },
     "tech": [
-      "Next.js",
-      "Cloud Functions",
-      "Stripe",
-      "Prisma",
-      "Supabase",
-      "PlanetScale"
+      "Go",
+      "Python",
+      "SQL",
+      "Postgres/PostGIS",
+      "Airflow",
+      "React",
+      "Vega-Lite",
+      "Kubernetes",
+      "Docker",
+      "Spark",
+      "Elasticsearch",
+      "GraphQL",
+      "gRPC",
+      "BigQuery",
+      "GCS",
+      "RDS",
+      "S3",
+      "Snowflake",
+      "Concourse CI/CD",
+      "Terraform",
+      "Helm",
+      "Mode Analytics"
     ]
+  },
+  {
+    "company": "Over (acq. GoDaddy)",
+    "role": "Data Science Intern",
+    "start": "2016-06-01",
+    "end": "2016-07-01",
+    "summary": "Delivered data products that unlocked company-wide insights and powered intelligent user features.",
+    "highlights": [
+      "Built the first centralized, real-time KPI dashboard, scraping and normalizing Amplitude data to increase visibility into growth metrics.",
+      "Developed the backend API for the “auto-text” feature using the Imagga recognition API and NLP libraries to recommend contextual copy to users."
+    ],
+    "metrics": {
+      "dashboardCoverage": "Company-wide",
+      "featureType": "Auto-text"
+    },
+    "tech": ["Python", "Imagga API", "NLP libraries", "Amplitude"]
   }
 ]
