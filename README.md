@@ -7,7 +7,6 @@
 - **Styling**: Tailwind CSS
 - **Animations**: Framer Motion
 - **Data Viz**: D3.js
-- **Content**: MDX for blog posts
 - **Testing**: Vitest + React Testing Library
 - **Linting**: ESLint + Prettier
 - **Git Hooks**: Husky + lint-staged
@@ -64,22 +63,6 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 - `npm run test:coverage` - Run tests with coverage
 
 ## 📝 Content Management
-
-### Adding Blog Posts
-
-1. Create a new `.mdx` file in `src/content/blog/`
-2. Add frontmatter with metadata:
-
-   ```mdx
-   ---
-   title: 'Your Post Title'
-   date: '2024-01-01'
-   tags: ['tag1', 'tag2']
-   summary: 'Brief description of the post'
-   ---
-
-   Your content here...
-   ```
 
 ### Adding Projects
 

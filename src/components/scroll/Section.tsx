@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-type SectionId = 'experience' | 'blog' | 'contact';
+type SectionId = 'experience' | 'contact';
 
 interface Props {
   id: SectionId;

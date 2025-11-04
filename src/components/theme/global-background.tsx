@@ -16,7 +16,6 @@ declare global {
 }
 
 function inferSectionFromPath(pathname: string): Section {
-  if (pathname.startsWith('/blog')) return 'blog';
   if (pathname.startsWith('/contact')) return 'contact';
   if (pathname.startsWith('/experience')) return 'experience';
   return 'hero';

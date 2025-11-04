@@ -6,7 +6,6 @@ import { useEffect, useRef } from 'react';
 import { useNavigation } from '@/components/theme/global-navigation';
 import { Hero } from './hero';
 import { Experience } from './experience';
-import { Blog } from './blog';
 import { Contact } from './contact';
 
 export function Container() {
@@ -99,7 +98,6 @@ export function Container() {
         aria-hidden={isHeroMode}
       >
         <Experience id="experience" onBack={() => navigateToSection('hero')} />
-        <Blog id="blog" onBack={() => navigateToSection('hero')} />
         <Contact id="contact" onBack={() => navigateToSection('hero')} />
       </motion.div>
     </div>

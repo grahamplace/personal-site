@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 
-This Next.js app uses the App Router in `src/app` for routes and layouts. Reusable UI sits in `src/components`, data helpers in `src/lib`, and pure utilities in `src/utils`. Content lives in `src/content` (MDX blog posts plus JSON), while static assets belong in `public/`. Global Vitest config is in `test/setup.ts`; keep component or hook specs next to their source as `Name.test.ts[x]` files for fast context.
+This Next.js app uses the App Router in `src/app` for routes and layouts. Reusable UI sits in `src/components`, data helpers in `src/lib`, and pure utilities in `src/utils`. Content lives in `src/content`, while static assets belong in `public/`. Global Vitest config is in `test/setup.ts`; keep component or hook specs next to their source as `Name.test.ts[x]` files for fast context.
 
 ## Build, Test, and Development Commands
 

@@ -15,14 +15,12 @@ const accentColor4 = '#20504E'; // Dark Slate Gray
 export const GRADIENT_COLORS = {
   hero: [baseColor1, baseColor2, baseColor3, accentColor1],
   experience: [baseColor1, baseColor2, baseColor3, accentColor2],
-  blog: [baseColor1, baseColor2, baseColor3, accentColor3],
   contact: [baseColor1, baseColor2, baseColor3, accentColor4],
 } as const;
 
 export const SECTION_ACCENT_COLORS = {
   hero: accentColor1,
   experience: accentColor2,
-  blog: accentColor3,
   contact: accentColor4,
 } as const;
 

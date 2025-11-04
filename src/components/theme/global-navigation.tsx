@@ -10,17 +10,14 @@ import {
   type ReactNode,
 } from 'react';
 
-export type Section = 'hero' | 'experience' | 'blog' | 'contact';
+export type Section = 'hero' | 'experience' | 'contact';
 
 interface NavigationContextType {
   currentSection: Section;
   isHomePage: boolean;
   isHeroMode: boolean;
   isNavigating: boolean;
-  currentBlogSlug: string | null;
   navigateToSection: (section: Section) => void;
-  openBlogPost: (slug: string) => void;
-  closeBlogPost: () => void;
 }
 
 const NavigationContext = createContext<NavigationContextType | null>(null);
@@ -38,7 +35,6 @@ interface NavigationProviderProps {
 
 export function NavigationProvider({ children }: NavigationProviderProps) {
   const [currentSection, setCurrentSection] = useState<Section>('hero');
-  const [currentBlogSlug, setCurrentBlogSlug] = useState<string | null>(null);
   const [isNavigating, setIsNavigating] = useState(false);
   const [isHeroMode, setIsHeroMode] = useState(true);
 
@@ -59,7 +55,7 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
 
   // Scroll spy: detect which section is currently in view
   useEffect(() => {
-    const sectionIds: Section[] = ['hero', 'experience', 'blog', 'contact'];
+    const sectionIds: Section[] = ['hero', 'experience', 'contact'];
 
     const getCurrentSection = () => {
       const scrollY = window.scrollY;
@@ -124,13 +120,6 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
     }
   }, [currentSection]);
 
-  // Restore blog overlay from URL on load
-  useEffect(() => {
-    const url = new URL(window.location.href);
-    const post = url.searchParams.get('post');
-    if (post) setCurrentBlogSlug(post);
-  }, []);
-
   const navigateToSection = (section: Section) => {
     setIsNavigating(true);
 
@@ -174,29 +163,12 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
     }, 900);
   };
 
-  const openBlogPost = (slug: string) => {
-    setCurrentBlogSlug(slug);
-    const url = new URL(window.location.href);
-    url.searchParams.set('post', slug);
-    window.history.pushState({}, '', url.toString());
-  };
-
-  const closeBlogPost = () => {
-    setCurrentBlogSlug(null);
-    const url = new URL(window.location.href);
-    url.searchParams.delete('post');
-    window.history.pushState({}, '', url.toString());
-  };
-
   const value: NavigationContextType = {
     currentSection,
     isHomePage,
     isHeroMode,
     isNavigating,
-    currentBlogSlug,
     navigateToSection,
-    openBlogPost,
-    closeBlogPost,
   };
 
   return (

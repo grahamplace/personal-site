@@ -5,7 +5,6 @@ import { useSectionHash } from './useSectionHash';
 
 const items = [
   { id: 'experience', label: 'Experience' },
-  { id: 'blog', label: 'Blog' },
   { id: 'contact', label: 'Contact' },
 ] as const;
 

@@ -1,7 +1,6 @@
 import SectionNav from '@/components/scroll/SectionNav';
 import { Section } from '@/components/scroll/Section';
 import { Experience } from '@/components/home/experience';
-import { Blog } from '@/components/home/blog';
 import { Contact } from '@/components/home/contact';
 import { SmoothProvider } from '@/components/scroll/SmoothProvider';
 
@@ -15,14 +14,6 @@ export default function ScrollDemoPage() {
           <div className="w-full">
             <div className="snap-start">
               <Experience id="experience" />
-            </div>
-          </div>
-        </Section>
-
-        <Section id="blog" raw>
-          <div className="w-full">
-            <div className="snap-start">
-              <Blog id="blog" />
             </div>
           </div>
         </Section>

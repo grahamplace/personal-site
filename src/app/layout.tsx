@@ -4,7 +4,6 @@ import { ThemeAccent } from '@/components/theme/theme-accent';
 import { GlobalBackground } from '@/components/theme/global-background';
 import { GlobalHeader } from '@/components/theme/global-header';
 import { NavigationProvider } from '@/components/theme/global-navigation';
-import { BlogPostOverlay } from '@/components/blog/blog-post-overlay';
 import './globals.css';
 
 const inter = Inter({
@@ -68,7 +67,6 @@ export default function RootLayout({
           <GlobalBackground />
           <GlobalHeader />
           <main className="min-h-screen">{children}</main>
-          <BlogPostOverlay />
         </NavigationProvider>
       </body>
     </html>

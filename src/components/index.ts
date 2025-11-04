@@ -8,21 +8,11 @@ export { KPIList } from './ui/kpi-list';
 export { GlassPane } from './ui/glass-pane';
 export { Button } from './ui/button';
 
-// Case Study Components
-export { CaseStudyHero } from './case-study/case-study-hero';
-export { CaseStudyBody } from './case-study/case-study-body';
-export { ImageStrip } from './case-study/image-strip';
-
 // Resume Components
 export { ResumeSection } from './resume/resume-section';
 export { ResumeItem } from './resume/resume-item';
 export { Resume } from './resume/resume';
 export { SkillsMatrix } from './resume/skills-matrix';
-
-// Blog Components
-export { BlogCard } from './blog/blog-card';
-export { MDXRenderer } from './blog/mdx-renderer';
-export { AutoHeaderGraphic } from './blog/auto-header-graphic';
 
 // Theme Components
 export { ThemeAccent } from './theme/theme-accent';
