@@ -20,8 +20,6 @@ export function Button({
 }: ButtonProps) {
   return (
     <motion.button
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
       onClick={onClick}
       className={cn(
         'w-36 rounded-lg border px-6 py-3 text-base font-medium shadow-lg backdrop-blur-sm transition-all duration-300',

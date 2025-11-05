@@ -12,18 +12,6 @@ interface ContactProps {
 
 const contactMethods = [
   {
-    label: 'Email',
-    value: 'graham@example.com',
-    href: 'mailto:graham@example.com',
-    icon: '📧',
-  },
-  {
-    label: 'Twitter',
-    value: '@grahamplace',
-    href: 'https://twitter.com/grahamplace',
-    icon: '🐦',
-  },
-  {
     label: 'LinkedIn',
     value: 'in/grahamplace',
     href: 'https://linkedin.com/in/grahamplace',
@@ -48,7 +36,7 @@ export function Contact({ className, id, onBack }: ContactProps) {
       className={cn('relative scroll-mt-48', className)}
     >
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-4xl px-6 pb-8 pt-16 md:pb-12 md:pt-24">
+      <div className="relative z-10 mx-auto max-w-4xl px-6 pb-8 md:pb-12 ">
         {/* Contact Methods */}
         <GlassPane variant="default" className="mx-auto max-w-4xl">
           <motion.div
@@ -68,8 +56,6 @@ export function Contact({ className, id, onBack }: ContactProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
                 className="bg-white/8 hover:bg-white/12 group rounded-lg border border-white/15 p-6 backdrop-blur-sm transition-all duration-200 hover:border-white/25 hover:shadow-lg"
               >
                 <div className="flex items-center space-x-4">
@@ -87,34 +73,6 @@ export function Contact({ className, id, onBack }: ContactProps) {
             ))}
           </motion.div>
         </GlassPane>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-10 text-center md:mt-14"
-        >
-          <GlassPane variant="default" className="mx-auto max-w-3xl">
-            <h3 className="mb-4 text-2xl font-bold text-white">
-              Open to new opportunities
-            </h3>
-            <p className="mx-auto mb-6 max-w-2xl text-white/85">
-              I&apos;m always interested in hearing about new projects,
-              especially those involving data systems, product development, or
-              early-stage startups.
-            </p>
-            <motion.a
-              href="mailto:graham@example.com"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-block rounded-lg bg-white/20 px-8 py-4 text-lg font-medium text-white shadow-lg backdrop-blur-sm transition-all duration-200 hover:bg-white/30 hover:shadow-xl"
-            >
-              Get in touch
-            </motion.a>
-          </GlassPane>
-        </motion.div>
       </div>
     </motion.section>
   );

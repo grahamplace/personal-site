@@ -35,10 +35,7 @@ export function Card({
   const Component = href ? 'a' : onClick ? 'button' : 'div';
 
   return (
-    <motion.div
-      whileHover={hover ? { y: -2 } : undefined}
-      transition={{ duration: 0.2 }}
-    >
+    <motion.div>
       <Component
         href={href}
         onClick={onClick}

@@ -44,12 +44,6 @@ export const metadata: Metadata = {
     siteName: 'Graham Place',
     type: 'website',
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Graham Place - Software Engineer & Builder',
-    description:
-      'Engineer & builder with a focus on data systems and product impact.',
-  },
 };
 
 export default function RootLayout({
