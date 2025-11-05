@@ -8,10 +8,9 @@ import { GlassPane } from '@/components/ui/glass-pane';
 interface ExperienceProps {
   className?: string;
   id?: string;
-  onBack?: () => void;
 }
 
-export function Experience({ className, id, onBack }: ExperienceProps) {
+export function Experience({ className, id }: ExperienceProps) {
   return (
     <motion.section
       id={id}

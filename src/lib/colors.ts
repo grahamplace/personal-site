@@ -9,7 +9,7 @@ const baseColor2 = '#404556'; // Charcoal
 const baseColor3 = '#17292B'; // Gunmetal
 const accentColor1 = '#60515C'; // Wenge
 const accentColor2 = '#597D7C'; // Hooker's Green
-const accentColor3 = '#386775'; // Payne's Gray
+// const accentColor3 = '#386775'; // Payne's Gray
 const accentColor4 = '#20504E'; // Dark Slate Gray
 
 export const GRADIENT_COLORS = {

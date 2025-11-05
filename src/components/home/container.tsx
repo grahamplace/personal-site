@@ -97,8 +97,8 @@ export function Container() {
         )}
         aria-hidden={isHeroMode}
       >
-        <Experience id="experience" onBack={() => navigateToSection('hero')} />
-        <Contact id="contact" onBack={() => navigateToSection('hero')} />
+        <Experience id="experience" />
+        <Contact id="contact" />
       </motion.div>
     </div>
   );

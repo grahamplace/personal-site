@@ -58,7 +58,7 @@ export function GlobalBackground() {
         window.__setGradientSection = undefined;
       }
     };
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     // Sync on route change

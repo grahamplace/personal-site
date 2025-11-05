@@ -6,7 +6,6 @@
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **Animations**: Framer Motion
-- **Data Viz**: D3.js
 - **Testing**: Vitest + React Testing Library
 - **Linting**: ESLint + Prettier
 - **Git Hooks**: Husky + lint-staged

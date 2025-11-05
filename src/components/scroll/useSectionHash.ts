@@ -29,7 +29,7 @@ export function useSectionHash(ids: string[]) {
 
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
-  }, [ids]);
+  }, [ids, current]);
 
   return current;
 }

@@ -7,7 +7,6 @@ import { GlassPane } from '@/components/ui/glass-pane';
 interface ContactProps {
   className?: string;
   id?: string;
-  onBack?: () => void;
 }
 
 const contactMethods = [
@@ -25,7 +24,7 @@ const contactMethods = [
   },
 ];
 
-export function Contact({ className, id, onBack }: ContactProps) {
+export function Contact({ className, id }: ContactProps) {
   return (
     <motion.section
       id={id}

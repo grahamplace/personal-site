@@ -14,7 +14,7 @@ export function SmoothProvider({ children }: Props) {
   useEffect(() => {
     if (reduced) return;
 
-    const lenis = new Lenis({ smoothWheel: true, smoothTouch: false });
+    const lenis = new Lenis({ smoothWheel: true });
     let rafId = 0;
 
     const raf = (time: number) => {
@@ -25,7 +25,6 @@ export function SmoothProvider({ children }: Props) {
     rafId = requestAnimationFrame(raf);
     return () => {
       cancelAnimationFrame(rafId);
-      // @ts-expect-error types may not include destroy depending on version
       lenis.destroy?.();
     };
   }, [reduced]);
