@@ -35,7 +35,12 @@ export function ResumeItem({
   };
 
   return (
-    <div className={cn('border-l-3 relative border-black/30 pl-6', className)}>
+    <div
+      className={cn(
+        'md:border-l-3 relative border-black/30 md:pl-6',
+        className
+      )}
+    >
       <span
         aria-hidden="true"
         className="pointer-events-none absolute bottom-2 left-0 top-2 w-[3px] rounded-full bg-cactusGreen/60"

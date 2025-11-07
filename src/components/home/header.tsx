@@ -75,8 +75,6 @@ export function Header({ className, onNavigate, currentSection }: HeaderProps) {
         transition={{ duration: 0.3, ease: 'easeOut' }}
         className="mx-auto max-w-7xl px-6"
         style={{
-          // paddingTop: isCompact ? 8 : 16,
-          // paddingBottom: isCompact ? 8 : 16,
           paddingTop: 12,
           paddingBottom: 12,
         }}

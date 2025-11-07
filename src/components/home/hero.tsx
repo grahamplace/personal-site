@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import useWindowSize from '@/hooks/useWindowSize';
 import { cn } from '@/lib/utils';
 import type { Section } from '@/components/theme/global-navigation';
 
@@ -12,6 +13,8 @@ interface HeroProps {
 }
 
 export function Hero({ className, id, onNavigate }: HeroProps) {
+  const { width } = useWindowSize();
+  const isMobile = width < 768;
   const verbs = ['build', 'code', 'ship', 'sell', 'work', 'design'];
   const [verbIndex, setVerbIndex] = useState(0);
 
@@ -44,11 +47,11 @@ export function Hero({ className, id, onNavigate }: HeroProps) {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="space-y-6"
         >
-          <h1 className="font-raleway text-6xl font-bold tracking-tight text-white sm:text-7xl lg:text-8xl">
+          <h1 className="font-raleway text-5xl font-bold tracking-tight text-white sm:text-7xl lg:text-8xl">
             Graham Place
           </h1>
           <p className="font-raleway relative mx-auto max-w-3xl text-xl leading-relaxed text-white/90 sm:text-3xl">
-            Software engineer & leader. Let&apos;s{' '}
+            Software engineer & leader. {isMobile ? <br /> : ''} Let&apos;s{' '}
             <span className="relative inline-flex h-[1.2em] overflow-hidden align-baseline leading-none">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.span
@@ -57,7 +60,10 @@ export function Hero({ className, id, onNavigate }: HeroProps) {
                   animate={{ y: '0%', opacity: 1 }}
                   exit={{ y: '-100%', opacity: 0 }}
                   transition={{ duration: 0.5, ease: 'easeInOut' }}
-                  className="inline-block w-[94px] text-left leading-none"
+                  className={cn(
+                    'inline-block text-left leading-none',
+                    isMobile ? 'w-[64px]' : 'w-[94px]'
+                  )}
                 >
                   {verbs[verbIndex]}
                 </motion.span>
@@ -69,7 +75,7 @@ export function Hero({ className, id, onNavigate }: HeroProps) {
         <motion.button
           aria-label="Scroll to next section"
           onClick={() => onNavigate('experience')}
-          className="absolute left-1/2 z-10 mt-4 -translate-x-1/2 rounded-full border border-white/30 bg-white/10 p-3.5 text-white shadow-md backdrop-blur-sm transition hover:bg-white/20"
+          className="absolute left-1/2 z-10 -translate-x-1/2 rounded-full border border-white/30 bg-white/10 p-3.5 text-white shadow-md backdrop-blur-sm transition hover:bg-white/20 md:mt-4"
           initial={{ opacity: 0 }}
           animate={{
             opacity: 1,
@@ -89,7 +95,7 @@ export function Hero({ className, id, onNavigate }: HeroProps) {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            className="h-8 w-8"
+            className="h-6 w-6 md:h-8 md:w-8"
           >
             <path
               fillRule="evenodd"
