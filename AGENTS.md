@@ -1,3 +1,11 @@
+<!-- BEGIN:nextjs-agent-rules -->
+
+# Next.js: ALWAYS read docs before coding
+
+Before any Next.js work, find and read the relevant doc in `node_modules/next/dist/docs/`. Your training data is outdated — the docs are the source of truth.
+
+<!-- END:nextjs-agent-rules -->
+
 # Repository Guidelines
 
 ## Project Structure & Module Organization
@@ -6,7 +14,7 @@ This Next.js app uses the App Router in `src/app` for routes and layouts. Reusab
 
 ## Build, Test, and Development Commands
 
-- `npm run dev` — Launch the dev server on http://localhost:3000 with Turbopack.
+- `npm run dev` — Launch the dev server via portless with Turbopack (serves at https://personal-site.localhost). Always use `npm run dev`, not `next dev` directly, so traffic routes through portless.
 - `npm run build` — Create the production bundle.
 - `npm run start` — Serve the last build locally for smoke checks.
 - `npm run lint` / `npm run typecheck` — Run ESLint and TypeScript validations before a PR.

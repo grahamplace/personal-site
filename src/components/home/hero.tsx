@@ -51,7 +51,7 @@ export function Hero({ className, id, onNavigate }: HeroProps) {
             Graham Place
           </h1>
           <p className="font-raleway relative mx-auto max-w-3xl text-xl leading-relaxed text-white/90 sm:text-3xl">
-            Software engineer & leader. {isMobile ? <br /> : ''} Let&apos;s{' '}
+            Software engineer & leader.{isMobile ? <br /> : ' '}Let&apos;s{' '}
             <span className="relative inline-flex h-[1.2em] overflow-hidden align-baseline leading-none">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.span

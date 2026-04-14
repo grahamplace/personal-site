@@ -73,14 +73,18 @@ export function AutoHeaderGraphic({
     lg: 'w-32 h-32',
   };
 
-  const renderShape = (shape: {
-    type: string;
-    color: string;
-    x: number;
-    y: number;
-    size: number;
-  }) => {
+  const renderShape = (
+    shape: {
+      type: string;
+      color: string;
+      x: number;
+      y: number;
+      size: number;
+    },
+    index: number
+  ) => {
     const colorClass = `bg-${shape.color}`;
+    const delay = (index * 0.15) % 0.5;
 
     switch (shape.type) {
       case 'circle':
@@ -96,7 +100,7 @@ export function AutoHeaderGraphic({
             }}
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 0.7 }}
-            transition={{ duration: 0.6, delay: Math.random() * 0.5 }}
+            transition={{ duration: 0.6, delay }}
           />
         );
       case 'square':
@@ -112,7 +116,7 @@ export function AutoHeaderGraphic({
             }}
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 0.7 }}
-            transition={{ duration: 0.6, delay: Math.random() * 0.5 }}
+            transition={{ duration: 0.6, delay }}
           />
         );
       case 'triangle':
@@ -131,7 +135,7 @@ export function AutoHeaderGraphic({
             }}
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 0.7 }}
-            transition={{ duration: 0.6, delay: Math.random() * 0.5 }}
+            transition={{ duration: 0.6, delay }}
           />
         );
       case 'diamond':
@@ -147,7 +151,7 @@ export function AutoHeaderGraphic({
             }}
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 0.7 }}
-            transition={{ duration: 0.6, delay: Math.random() * 0.5 }}
+            transition={{ duration: 0.6, delay }}
           />
         );
       default:
