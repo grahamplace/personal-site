@@ -13,9 +13,9 @@ const accentColor2 = '#597D7C'; // Hooker's Green
 const accentColor4 = '#20504E'; // Dark Slate Gray
 
 export const GRADIENT_COLORS = {
-  hero: [baseColor1, baseColor2, baseColor3, accentColor1],
-  experience: [baseColor1, baseColor2, baseColor3, accentColor2],
-  contact: [baseColor1, baseColor2, baseColor3, accentColor4],
+  hero: ['#1a1a2e', '#16213e', '#0f3460', '#533483'],
+  experience: ['#1a2e2a', '#0f3d3a', '#1b5e4b', '#2d6e5e'],
+  contact: ['#2e1a2e', '#3d1f3d', '#5c2d5c', '#4a2040'],
 } as const;
 
 export const SECTION_ACCENT_COLORS = {

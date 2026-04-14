@@ -70,11 +70,11 @@ export function ResumeItem({
         {location && <p className="text-sm text-white/70">{location}</p>}
 
         {description && (
-          <p className="leading-relaxed text-white/80">{description}</p>
+          <p className="leading-relaxed text-white">{description}</p>
         )}
 
         {highlights && highlights.length > 0 && (
-          <ul className="list-inside list-disc space-y-1 text-sm text-white/80">
+          <ul className="list-inside list-disc space-y-1 text-sm text-white">
             {highlights.map((highlight, index) => (
               <li key={index}>{highlight}</li>
             ))}

@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { GLASS_VARIANTS } from '@/components/ui/glass-pane';
 import { getSectionAccentColor } from '@/lib/colors';
 import { useEffect, useRef, useState } from 'react';
 
@@ -66,7 +67,8 @@ export function Header({ className, onNavigate, currentSection }: HeaderProps) {
       exit={{ y: -100, opacity: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className={cn(
-        'fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-black/20 backdrop-blur-md',
+        'fixed left-0 right-0 top-0 z-50',
+        GLASS_VARIANTS.default,
         className
       )}
     >

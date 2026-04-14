@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { Gradient } from '@/lib/gradient.js';
+import { Gradient } from '@/lib/gradient';
 import {
   type Section,
   getSectionGradientColorsForLibrary,
@@ -30,10 +30,7 @@ export function GlobalBackground() {
       'global-gradient-canvas'
     ) as HTMLCanvasElement | null;
     canvasRef.current = canvas;
-    const gradient = new Gradient() as unknown as {
-      initGradient: (selector: string) => void;
-      updateColors: (colors: number[]) => void;
-    };
+    const gradient = new Gradient();
     gradient.initGradient('#global-gradient-canvas');
 
     const setSection = (section: Section) => {
