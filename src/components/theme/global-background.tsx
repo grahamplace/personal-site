@@ -50,7 +50,7 @@ export function GlobalBackground() {
     setSection(inferSectionFromPath(initialPath));
 
     return () => {
-      // leave canvas as is; gradient library handles its own loops
+      gradient.destroy();
       if (window.__setGradientSection === setSection) {
         window.__setGradientSection = undefined;
       }

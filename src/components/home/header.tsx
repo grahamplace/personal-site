@@ -10,7 +10,6 @@ import { useEffect, useRef, useState } from 'react';
 interface HeaderProps {
   className?: string;
   onNavigate: (section: string) => void;
-  showBackButton?: boolean;
   currentSection?: string;
 }
 

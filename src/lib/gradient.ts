@@ -1,4 +1,4 @@
-export function normalizeColor(hexCode: number): [number, number, number] {
+function normalizeColor(hexCode: number): [number, number, number] {
   return [
     ((hexCode >> 16) & 255) / 255,
     ((hexCode >> 8) & 255) / 255,
@@ -173,10 +173,12 @@ export class Gradient {
   private uWaveWidth: WebGLUniformLocation | null = null;
   private boundRender: (t: number) => void;
   private boundResize: () => void;
+  private boundVisibility: () => void;
 
   constructor() {
     this.boundRender = this.render.bind(this);
     this.boundResize = this.resize.bind(this);
+    this.boundVisibility = this.onVisibilityChange.bind(this);
   }
 
   initGradient(selector: string): this {
@@ -198,16 +200,25 @@ export class Gradient {
     this.resize();
 
     window.addEventListener('resize', this.boundResize);
-    document.addEventListener('visibilitychange', () => {
-      if (!document.hidden && !this.animationFrameId) {
-        this.animationFrameId = requestAnimationFrame(this.boundRender);
-      }
-    });
+    document.addEventListener('visibilitychange', this.boundVisibility);
 
     this.startTime = performance.now();
     this.animationFrameId = requestAnimationFrame(this.boundRender);
     this.canvas.classList.add('isLoaded');
     return this;
+  }
+
+  destroy(): void {
+    if (this.animationFrameId) {
+      cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = 0;
+    }
+    window.removeEventListener('resize', this.boundResize);
+    document.removeEventListener('visibilitychange', this.boundVisibility);
+    if (this.gl) {
+      this.gl.getExtension('WEBGL_lose_context')?.loseContext();
+      this.gl = null;
+    }
   }
 
   updateColors(colors: number[]): void {
@@ -291,6 +302,12 @@ export class Gradient {
     gl.uniform1f(this.uBorderIntensity, 0.8);
     gl.uniform1f(this.uWaveIntensity, 1.0);
     gl.uniform1f(this.uWaveWidth, 1.0);
+  }
+
+  private onVisibilityChange(): void {
+    if (!document.hidden && !this.animationFrameId) {
+      this.animationFrameId = requestAnimationFrame(this.boundRender);
+    }
   }
 
   private resize(): void {

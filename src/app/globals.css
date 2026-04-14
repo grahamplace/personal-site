@@ -51,12 +51,6 @@ html {
   color: #111827; /* gray-900 */
 }
 
-#gradient-canvas {
-  width: 100%;
-  height: 100%;
-  /* CSS variables will be set dynamically from colors.ts */
-}
-
 /* Scroll snapping helpers (optional, used on /scroll) */
 .snap-y {
   scroll-snap-type: y proximity;
