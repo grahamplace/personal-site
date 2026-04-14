@@ -13,7 +13,7 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.0.0",
@@ -23,33 +23,33 @@
     "@types/d3": "^7.4.3",
     "clsx": "^2.0.0",
     "d3": "^7.8.5",
-    "framer-motion": "^11.0.0",
+    "framer-motion": "^12.38.0",
     "next": "16.2.3",
     "react": "19.2.5",
     "react-dom": "19.2.5",
-    "tailwind-merge": "^2.0.0"
+    "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^16.0.0",
-    "@types/node": "^20",
+    "@types/node": "^25.6.0",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
-    "@vitejs/plugin-react": "^4.0.0",
-    "@vitest/coverage-v8": "^1.0.0",
-    "@vitest/ui": "^1.0.0",
+    "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/coverage-v8": "^4.1.4",
+    "@vitest/ui": "^4.1.4",
     "eslint": "^9",
     "eslint-config-next": "16.2.3",
-    "husky": "^8.0.0",
-    "jsdom": "^23.0.0",
-    "lint-staged": "^15.0.0",
+    "husky": "^9.1.7",
+    "jsdom": "^29.0.2",
+    "lint-staged": "^16.4.0",
     "portless": "^0.10.2",
     "prettier": "^3.0.0",
-    "prettier-plugin-tailwindcss": "^0.5.0",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "vitest": "^1.0.0"
+    "vitest": "^4.1.4"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,md,mdx,json}": [
